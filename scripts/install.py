@@ -50,6 +50,20 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
             return 2
         jobs.append((src, cfg_root / name, False))
 
+    # Always-on project rules make preferences effective even without a Skill.
+    # Do not touch existing rules: project owners may have customized them.
+    rule_jobs = []
+    if tool in ("cursor", "both"):
+        rule_jobs.append(("cursor-rule.mdc", ".cursor/rules/agent-workflow.mdc"))
+    if tool in ("claude", "both"):
+        rule_jobs.append(("claude-rule.md", ".claude/rules/agent-workflow.md"))
+    for template_name, relative_dest in rule_jobs:
+        src = ROOT / "templates" / template_name
+        if not src.is_file():
+            print(f"ERROR: missing rule template: {src}", file=sys.stderr)
+            return 2
+        jobs.append((src, target / relative_dest, False))
+
     # Language is independent of the user preferences file and is never overwritten.
     jobs.append((None, cfg_root / "language.md", False))
 
