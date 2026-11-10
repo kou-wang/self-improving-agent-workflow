@@ -6,3 +6,4 @@ __pycache__/
 *.pem
 *.key
 *.zip
+\n# Project-local upgrade backups should not be published\n**/.agent-workflow/backups/\n
