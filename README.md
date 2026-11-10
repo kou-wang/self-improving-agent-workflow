@@ -53,6 +53,10 @@ Stages have **no automatic orchestration**. `investigate` may be selected automa
 
 Evidence before rules; meaningful approvals before writes; project constraints separate from reusable Skills; no destructive overwrite during installation; verification reports distinguish static checks, behavioral checks and confirmed outcomes.
 
+## Roadmap
+
+See [TODO.md](TODO.md) for upcoming work, including **token efficiency**, **configurable read/write database access**, and **GitHub/GitLab integrations**. These are planned and not yet implemented.
+
 ## Project status
 
 Five Skills and an onboarding installer exist in the repository. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
