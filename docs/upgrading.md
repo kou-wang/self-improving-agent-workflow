@@ -2,7 +2,7 @@
 
 **Recommended for end users once a stable release exists:** [agent-workflow CLI](cli.md). Run `agent-workflow update` in your project; it checks the latest published stable GitHub Release and updates safe official Skills without asking you to pull the repo. The instructions below document the underlying checkout-based developer utility.
 
-The public repository uses a `VERSION` file. This is currently a **development version**, not an official stable release or Git tag. Version tags and changelog entries should accompany future releases.
+The public repository uses a `VERSION` file. A stable `v0.1.0` release exists. New changes on branches or on `main` are **not delivered by the release-based updater** until a later stable tag is published. Version tags and changelog entries should accompany future releases.
 
 ## One-time install
 
@@ -28,12 +28,12 @@ The updater compares upstream Skill file contents against the installed files an
 
 - Update official files that match the previously managed hash.
 - Add an official Skill only if its directory does not already exist.
-- Preserve all user-created Skills, language, preferences, project rules and files outside official Skill directories.
+- Preserve all user-created Skills, language, preferences, project rules and files outside official Skill directories, including automatically initialized Cursor/Claude response rules.
 - Keep locally changed official Skills unchanged and report a conflict.
 - Create a timestamped backup before replacing any file.
 - Output a backup ID that can be used for rollback.
 
-A newer checkout is **not** the same as a tested release; prefer a known tag/commit and read release notes when tags are available.
+A newer checkout is **not** the same as a tested release; prefer a known tag/commit and read the release notes. To add a missing project response rule after an older install, rerun the newer installer; core Skill updates alone do not create these rule files or replace existing user preferences.
 
 ## Conflicts: Keep Local / Use Upstream / Merge
 
