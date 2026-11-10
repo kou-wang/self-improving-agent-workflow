@@ -1,12 +1,24 @@
-name: Installer smoke tests
+name: Python installer and release CLI tests
 on:
   push:
     branches: [main]
   pull_request:
+
 jobs:
-  installer:
+  python-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
-      - name: Test on Python 3
-        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install CLI package
+        run: python -m pip install .
+      - name: Verify console command is installed
+        run: agent-workflow --help
+      - name: Run installer, updater and mocked Release tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
