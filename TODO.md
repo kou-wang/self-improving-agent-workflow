@@ -9,10 +9,13 @@ This roadmap distinguishes shipped configuration/instructions from features that
 - [x] Three response language choices: `en` / `zh-CN` / `zh-TW`
 - [x] Safe, non-overwriting project installer and separate language switcher
 - [x] Add version file, installation manifest, offline safe updater, conflict protection and rollback
+- [x] Package `agent-workflow` CLI and implement stable GitHub Releases discovery/download without recurring `git pull`
+- [ ] Run and verify CLI packaging and mocked GitHub Release tests in CI
+- [ ] Publish first stable GitHub Release after smoke tests and license selection
 - [ ] Run installer **and upgrade** unit tests and confirm CI on GitHub
 - [ ] Validate update/rollback against both Cursor and Claude Code projects
 - [ ] Publish semantic-versioned GitHub release tags and changelog for each release
-- [ ] Consider opt-in notification of newer upstream versions; current check uses local checkout only
+- [ ] Consider opt-in update notifications; CLI already checks the remote latest stable Release when invoked
 - [ ] End-to-end smoke test in a fresh Cursor project
 - [ ] End-to-end smoke test in a fresh Claude Code project
 - [ ] Validate Review proposals on real cases, including updates vs. new Skills
