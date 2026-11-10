@@ -12,6 +12,8 @@ Version tags should follow SemVer (`vMAJOR.MINOR.PATCH`) once the release proces
 - Initial managed installation state (version + SHA-256 hashes).
 - Safe local-checkout updater: check/apply, keep-local default, opt-in use-upstream, backups and guarded rollback.
 - Documentation for onboarding, manual workflow, and upgrades.
+- Packaged `agent-workflow` CLI for installation and upgrades using stable GitHub Releases (no recurring git pull).
+- Mocked offline CLI tests, including missing releases, unsafe release contents, and custom Skill preservation.
 - Automated Python regression test definitions.
 
 ### Before the first stable release
