@@ -40,6 +40,19 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue((self.project / ".claude/skills/review-skill/SKILL.md").is_file())
         self.assertFalse((self.project / ".cursor").exists())
 
+    def test_language_options_and_preservation(self):
+        for code in ("en", "zh-CN", "zh-TW"):
+            with self.subTest(code=code):
+                with tempfile.TemporaryDirectory() as temp:
+                    target = Path(temp)
+                    self.assertEqual(installer.install("cursor", target, True, code), 0)
+                    language = target / ".agent-workflow" / "language.md"
+                    self.assertEqual(language.read_text(encoding="utf-8"),
+                                     f"# Agent response language\nLanguage: {code}\n")
+                    self.assertEqual(installer.install("cursor", target, True, "en"), 0)
+                    self.assertEqual(language.read_text(encoding="utf-8"),
+                                     f"# Agent response language\nLanguage: {code}\n")
+
     def test_missing_target_fails_without_creation(self):
         target = self.project / "missing"
         self.assertEqual(installer.install("claude", target, True), 2)
