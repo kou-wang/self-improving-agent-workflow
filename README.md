@@ -2,9 +2,26 @@
 
 **Make your coding agent adapt to you—not the other way around.** A human-in-the-loop workflow that learns from concrete developer feedback by proposing updates to existing Skills **or creation of new project-specific Skills**. The goal is to reduce repetitive corrections, explanations, and developer-agent interaction over time. Supports **Cursor** and **Claude Code**.
 
-**Start here: [New user Quickstart](docs/quickstart.md)** — clone, install, configure, use all five stages, and review proposed improvements.
+**Start here: [New user Quickstart](docs/quickstart.md) · [CLI setup / updates](docs/cli.md)** — clone, install, configure, use all five stages, and review proposed improvements.
 
-## Install (preview first)
+## Recommended CLI workflow (after the first stable Release)
+
+Install the CLI once:
+
+```bash
+pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git
+```
+
+In your project:
+
+```bash
+agent-workflow install --tool cursor --language zh-CN
+agent-workflow update
+```
+
+No recurring `git pull` is needed for Skill updates. **There is no stable GitHub Release yet**, so release-based installation/updates currently report a clear error. This is intentionally not a production-ready promise; see [CLI documentation](docs/cli.md).
+
+## Legacy development install (preview first)
 
 ```bash
 git clone https://github.com/kou-wang/self-improving-agent-workflow.git
@@ -26,7 +43,7 @@ python3 scripts/set_language.py --target /path/to/your-project --language zh-TW 
 
 Only `.agent-workflow/language.md` is changed; personal preferences and existing Skills are preserved. Restart the agent session if necessary. Exact identifiers and requested terminology are not translated.
 
-## Safe upgrades
+## Legacy local-checkout upgrades
 
 Update the source checkout, preview the managed Skill changes, then apply:
 
@@ -56,6 +73,8 @@ Stages have **no automatic orchestration**. `investigate` may be selected automa
 - [`docs/quickstart.md`](docs/quickstart.md) — complete onboarding and smoke test
 - [`scripts/install.py`](scripts/install.py) — dry-run-first, non-overwriting project installer
 - [`scripts/update.py`](scripts/update.py) — version-aware upgrade with conflict protection and rollback
+- [`agent_workflow/cli.py`](agent_workflow/cli.py) — `agent-workflow` CLI using stable GitHub Releases
+- [`docs/cli.md`](docs/cli.md) — first-time CLI install and no-pull updates
 - [`templates/`](templates/) — project-local rules and user preferences
 - [`docs/architecture.md`](docs/architecture.md) — stage contracts and boundaries
 - [`docs/review-design.md`](docs/review-design.md) — review categories and validation
@@ -72,7 +91,7 @@ See [TODO.md](TODO.md) for upcoming work, including **token efficiency**, **conf
 
 ## Project status
 
-Five Skills and an onboarding installer exist in the repository. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
+Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. The CLI's release-dependent operations cannot run until a stable Release is published. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
 
 ## License
 
