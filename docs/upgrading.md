@@ -1,5 +1,7 @@
 # Safe version upgrades
 
+**Recommended for end users once a stable release exists:** [agent-workflow CLI](cli.md). Run `agent-workflow update` in your project; it checks the latest published stable GitHub Release and updates safe official Skills without asking you to pull the repo. The instructions below document the underlying checkout-based developer utility.
+
 The public repository uses a `VERSION` file. This is currently a **development version**, not an official stable release or Git tag. Version tags and changelog entries should accompany future releases.
 
 ## One-time install
