@@ -1,15 +1,15 @@
 ---
 name: make-plan
 description: >-
-  Turn a request already clarified in the conversation into a bounded,
-  actionable plan with verifiable outcomes, prerequisites, and one recommended
-  approach. Use explicitly when asked to plan a change or test, not to execute it.
+  Independently plan a task from the user's current request and available
+  project or conversation context. Recommend a feasible approach, show meaningful
+  alternatives, and define verifiable outcomes without implementing.
 disable-model-invocation: true
 ---
 
 # Make Plan
 
-Translate an **already established request** into a plan a person can review, approve, and carry out. Preserve the agreed problem, intended outcome, and scope; do not reinterpret the request or quietly broaden it.
+Turn **either a direct request or an existing conversation decision** into a plan a person can review, approve, and carry out. This Skill is standalone: do not require a prior `learn-requirement` or `investigate` invocation. Reuse their findings if they exist; otherwise inspect the relevant project context yourself, as allowed. Preserve the user's intent and scope; do not quietly broaden either.
 
 **This Skill produces a plan only. Stop before implementing, editing files or data, creating commits, deploying, or invoking external write actions.**
 
@@ -17,7 +17,7 @@ Translate an **already established request** into a plan a person can review, ap
 
 ## Inputs and authority
 
-1. Read the relevant conversation, accessible requirement and investigation outputs, and any applicable project rules and user preferences. Do not claim earlier stages ran if their evidence is unavailable.
+1. Read the **current request first**, then any relevant accessible conversation, requirement/investigation findings if present, project rules, and user preferences. Never require the user to repeat known information or invoke another Skill as a prerequisite. Do not claim earlier stages ran when they did not.
 2. Establish **who needs what**, **what is true now**, **what success would look like**, and **whether the action is one-time or ongoing**.
 3. If the goal, critical constraints, authorization, or target environment is materially unresolved, identify exactly what must be decided and stop. Never default silently to local, staging, production, or any other potentially consequential target.
 4. Treat project-specific permissions and safety constraints as authoritative. A suggested plan is **not** permission to perform its steps.
@@ -33,7 +33,7 @@ Translate an **already established request** into a plan a person can review, ap
 
 ## Output / handoff
 
-Follow the user's preferred language, ordering, and terminology when such preferences exist. Otherwise use a concise format with the **recommendation first**:
+Follow the user's preferred language, ordering, and terminology, including the RMA-derived defaults from the installed preferences. Explain proposed **business behavior and impact before implementation mechanics**. Otherwise use a concise format with the **recommendation first**; omit empty or redundant headings rather than forcing a lengthy report:
 
 ### Recommendation: outcomes to approve
 
@@ -57,7 +57,7 @@ For each explicitly raised issue, identify the recommended step that addresses i
 
 ### Approval required
 
-Ask the user to approve or revise the **outcomes and scope**, not merely a numbered option. If approval is partial, the subsequent execution must be limited to what was actually approved.
+Ask the user to approve or revise the **outcomes and scope**, not merely a numbered option. If approval is partial, a later execution must be limited to what was actually approved. Do not insist that the user run any other Skill first. A user can also invoke `execute` directly on an independently clear, authorized task.
 
 ## Special case: test-only request
 
