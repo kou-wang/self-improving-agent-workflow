@@ -1,6 +1,6 @@
 # Quickstart: from zero to the first review
 
-**Preferred onboarding after the first stable GitHub Release:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. See the [CLI guide](cli.md). **Until the first stable Release is published, use the source-checkout development procedure below.**
+**Preferred onboarding:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. The current stable Release is `v0.1.0`; newer changes on the development branch (including these initialization defaults) need a subsequent tagged release before CLI users receive them. See the [CLI guide](cli.md). The source-checkout procedure below can be used for development.
 
 **Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 
@@ -57,6 +57,8 @@ your-project/
     make-plan/SKILL.md
     execute/SKILL.md
     review-skill/SKILL.md
+  .cursor/rules/agent-workflow.mdc  # Cursor, if selected
+  .claude/rules/agent-workflow.md   # Claude, if selected
   .agent-workflow/
     project-rules.md
     user-preferences.md  # prefilled, editable response defaults
@@ -85,11 +87,7 @@ Edit the **local** files in the target project:
 
 These files belong to **you** and are never replaced by the installer on subsequent runs. Do not put passwords, access tokens, or sensitive production details in them.
 
-**Important:** The shipped Skills rely on reading applicable local instructions. At the beginning of your first conversation, instruct the agent explicitly:
-
-> Before using these workflow Skills, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md`, plus `.agent-workflow/language.md` if present. Treat project constraints as binding, and preserve user preferences in responses.
-
-For ongoing reliability—especially for conversations **without any Skill invocation**—add that pointer to your project's existing `AGENTS.md` (Cursor) or `CLAUDE.md` (Claude Code) manually **after reviewing those files**. Installed Skills already read the local configuration when invoked; the installer deliberately does not edit global instruction files.
+**Always-on instructions:** The installer creates a small Cursor and/or Claude Code project rule that points to these editable local files, so the response baseline is available **even when no Skill is invoked**. It will not overwrite existing rule files, `AGENTS.md`, or `CLAUDE.md`. Installed Skills also read their relevant local configuration. If an older installation lacks the new rule, re-run an installer version that includes it (existing files are preserved).
 
 ## 4. Open the project in your agent
 
