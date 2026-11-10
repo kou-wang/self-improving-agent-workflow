@@ -28,6 +28,13 @@ class InstallerTests(unittest.TestCase):
         for name in installer.SKILLS:
             self.assertTrue((skills / name / "SKILL.md").is_file())
         prefs = self.project / ".agent-workflow" / "user-preferences.md"
+        starter = prefs.read_text(encoding="utf-8")
+        # A first install is useful immediately; the defaults remain user-owned.
+        self.assertIn("RMA-derived", starter)
+        self.assertIn("Business behavior first", starter)
+        self.assertIn("Bug investigation", starter)
+        self.assertIn("Code review", starter)
+        self.assertIn("Design / plan", starter)
         prefs.write_text("personal rule\n", encoding="utf-8")
         skill = skills / "execute" / "SKILL.md"
         skill.write_text("local customization\n", encoding="utf-8")
