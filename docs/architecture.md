@@ -18,7 +18,7 @@ Every Skill can be invoked on its own, including from the user's current request
 2. **Project rules**: allowed tools, environments, security and deployment constraints; the project owner owns these.
 3. **User preferences**: starts with generalized RMA-derived response defaults, then evolves through the user's approved corrections; the user owns these. The selected language stays in a separate local file.
 
-The installer copies **ready-to-use defaults** at first install. Skills read applicable project constraints and preferences. Defaults become binding **for those Skills in that installed project**, not globally for agents outside it. The installer and updater must not overwrite preferences or other local customizations.
+The installer copies **ready-to-use defaults** at first install. Skills read applicable project constraints and preferences. A short **always-on project rule** also points every Cursor/Claude chat at those settings, even when no Skill is invoked. Defaults apply only inside that project; the installer and updater must not overwrite preferences or other local customizations.
 
 ## Review boundaries
 
