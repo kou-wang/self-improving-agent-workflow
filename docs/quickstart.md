@@ -1,5 +1,7 @@
 # Quickstart: from zero to the first review
 
+**Preferred onboarding after the first stable GitHub Release:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. See the [CLI guide](cli.md). **Until the first stable Release is published, use the source-checkout development procedure below.**
+
 **Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 
 This installs a **manual, human-approved workflow** designed to reduce developer-agent back-and-forth. Review may propose updates to existing Skills or creation of new project-local Skills based on real repeated needs; it does not silently change files. Review proposes changes; you approve them before any edit.
@@ -128,6 +130,10 @@ After one real usage, say:
 Review suggestions are **not** self-applied. To adopt a proposal: approve exactly the desired edit(s) **or new Skill creation**, then separately authorize their application (for example by invoking `/execute` with the approved edit plan). Validate both the original case and an unrelated counterexample. When recurring work merits a new Skill, ask Review to specify the name, trigger, inputs, output, stop conditions, and expected reduction in repeated prompts. Keep new personal/project Skills in your target project, not in this public repository.
 
 ## 7. Keep the workflow up to date
+
+For the release-based CLI, simply use `agent-workflow update` after the first stable release has been published. It fetches the release itself, without pulling this repository. `agent-workflow update --check` previews the changes. This is separate from upgrading the CLI application itself; see [CLI guide](cli.md).
+
+### Development-only checkout method
 
 Your custom Skills, project rules and preferences belong to you; the official core can be upgraded separately. After updating this repository checkout (`git pull --ff-only`), run `python3 scripts/update.py --target /absolute/path/to/your-project --check`, then `--apply` after reviewing changes. Conflicts default to **Keep Local**. The updater creates a backup ID for safe rollback. See [Upgrade and rollback](upgrading.md) for full examples and limitations.
 
