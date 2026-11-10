@@ -4,7 +4,7 @@
 
 **Start here: [New user Quickstart](docs/quickstart.md) · [Initialization defaults](docs/initialization.md) · [CLI setup / updates](docs/cli.md)** — install a useful starter Skill set, invoke any Skill independently, and personalize it through approved review.
 
-## Recommended CLI workflow (after the first stable Release)
+## Recommended CLI workflow (stable releases)
 
 Install the CLI once:
 
@@ -19,7 +19,7 @@ agent-workflow install --tool cursor --language zh-CN
 agent-workflow update
 ```
 
-No recurring `git pull` is needed for Skill updates. **There is no stable GitHub Release yet**, so release-based installation/updates currently report a clear error. This is intentionally not a production-ready promise; see [CLI documentation](docs/cli.md).
+No recurring `git pull` is needed for Skill updates. Stable Release `v0.1.0` exists; **the initialization refinements in this change are unreleased until another stable tag**. See [CLI documentation](docs/cli.md).
 
 ## Legacy development install (preview first)
 
@@ -53,11 +53,11 @@ python3 scripts/update.py --target /path/to/your-project --check
 python3 scripts/update.py --target /path/to/your-project --apply
 ```
 
-Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **Current version: pre-release; no stable release tag yet.**
+Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **The current tagged Release is `v0.1.0`. Changes after that tag are not distributed by `agent-workflow update` until the next stable Release.**
 
 ## Initialization and flexible workflow
 
-New installations include **five ready-to-use independent Skills** and **RMA-derived response defaults** (business impact first, conclusion first, concise structured explanation, task-specific response patterns). These defaults are generalized: no internal RMA business rules, infrastructure, or data are shipped. The developer can refine them repeatedly through `review-skill`. See [Initialization defaults](docs/initialization.md).
+New installations include **five ready-to-use independent Skills**, **RMA-derived response defaults** (business impact first, conclusion first, concise structured explanation, task-specific response patterns), and a small always-on Cursor/Claude project rule so those defaults apply even in ordinary chats. These defaults are generalized: no internal RMA business rules, infrastructure, or data are shipped. The developer can refine them repeatedly through `review-skill`. See [Initialization defaults](docs/initialization.md).
 
 A common but **optional** path is:
 
@@ -96,7 +96,7 @@ See [TODO.md](TODO.md) for upcoming work, including **token efficiency**, **conf
 
 ## Project status
 
-Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. The CLI's release-dependent operations cannot run until a stable Release is published. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
+Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. Stable Release `v0.1.0` is published, but this branch's new initialization defaults are not yet part of a stable Release. Full Claude Code behavior and upgrade/rollback regression coverage remain incomplete; do not treat the workflows as certified for every client version.
 
 ## License
 
