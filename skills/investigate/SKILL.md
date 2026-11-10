@@ -89,7 +89,7 @@ A classification may be provisional. State competing explanations when evidence 
 
 ## Report / handoff
 
-Lead with a plain-language summary of what failed and its impact, not a dump of raw fields. Use the user's preferred language and vocabulary if provided.
+Lead with a **plain-language explanation the developer can understand**: expected behavior, what actually happened, the cause (or missing evidence), and the practical consequence. Never make the user reconstruct the behavior from a function or database field dump. Use the RMA-derived response defaults in `.agent-workflow/user-preferences.md`, including any later user customizations; adapt length to issue complexity.
 
 1. **What happened:** Action, expected vs. observed behavior, and which parts succeeded.
 2. **Why:** Rejected value/condition, its source, and the chain of evidence; identify uncertainty.
@@ -99,4 +99,4 @@ Lead with a plain-language summary of what failed and its impact, not a dump of 
 
 Attach concise evidence next to important claims (file/function, log reference, record/field, or test result). Do not expose secrets or unnecessary personal data. If no root cause is verified, say so explicitly.
 
-The handoff may inform **make-plan**, but does not authorize **execute**. Stop after the investigation report; no edits, commits, deployments, or state-changing remediation in this stage.
+This Skill is **standalone**: it does not require `learn-requirement`, and its findings may inform a later plan or discussion without forcing either. Investigating does not authorize code or state-changing remediation. Stop after the report; no edits, commits, deployments, or state-changing actions in this stage.
