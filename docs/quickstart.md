@@ -1,6 +1,6 @@
 # Quickstart: from zero to the first review
 
-**Preferred onboarding:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. The current stable Release is `v0.1.0`; newer changes on the development branch (including these initialization defaults) need a subsequent tagged release before CLI users receive them. See the [CLI guide](cli.md). The source-checkout procedure below can be used for development.
+**Preferred onboarding:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. Stable Release `v0.2.0` includes the independent Skills, RMA-derived starter preferences, and always-on project rules. The forthcoming `v0.2.1` is a documentation and licensing update. See the [CLI guide](cli.md). The source-checkout procedure below can be used for development.
 
 **Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 

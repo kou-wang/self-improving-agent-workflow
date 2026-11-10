@@ -19,7 +19,7 @@ agent-workflow install --tool cursor --language zh-CN
 agent-workflow update
 ```
 
-No recurring `git pull` is needed for Skill updates. Stable Release `v0.1.0` exists; **the initialization refinements in this change are unreleased until another stable tag**. See [CLI documentation](docs/cli.md).
+No recurring `git pull` is needed for Skill updates. The released `v0.2.0` includes the RMA-derived initialization defaults and always-on project rules. See [CLI documentation](docs/cli.md).
 
 ## Legacy development install (preview first)
 
@@ -53,7 +53,7 @@ python3 scripts/update.py --target /path/to/your-project --check
 python3 scripts/update.py --target /path/to/your-project --apply
 ```
 
-Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **The current tagged Release is `v0.1.0`. Changes after that tag are not distributed by `agent-workflow update` until the next stable Release.**
+Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **The CLI installs from the latest published stable GitHub Release, not unreleased commits.**
 
 ## Initialization and flexible workflow
 
@@ -96,11 +96,11 @@ See [TODO.md](TODO.md) for upcoming work, including **token efficiency**, **conf
 
 ## Project status
 
-Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. Stable Release `v0.1.0` is published, but this branch's new initialization defaults are not yet part of a stable Release. Full Claude Code behavior and upgrade/rollback regression coverage remain incomplete; do not treat the workflows as certified for every client version.
+**Early-access public release.** The five Skills, CLI, and RMA-derived starter defaults are available in stable `v0.2.0`. Automated Python tests pass and a CLI upgrade plus fresh Cursor project installation have been exercised. Full live Cursor/Claude Code behavior, compatibility across versions, and complete rollback scenarios remain unverified; this is not a production-certified agent workflow. CLI upgrades are separate from Skill upgrades (`pipx upgrade self-improving-agent-workflow`).
 
 ## License
 
-License selection pending. No open-source license granted until a license is explicitly added.
+[MIT License](LICENSE).
 
 ## Security
 

@@ -1,6 +1,6 @@
 # v0.2.0 — RMA-derived starter experience
 
-**Status:** release notes prepared; `v0.2.0` is **not yet tagged or published**.
+**Status:** `v0.2.0` was published on 2026-11-10.
 
 ## Highlights
 
@@ -20,7 +20,7 @@ Install the CLI (if not already installed):
 pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git
 ```
 
-In a new project after v0.2.0 is published:
+In a new project:
 
 ```bash
 agent-workflow install --tool cursor --language zh-CN
@@ -33,13 +33,13 @@ agent-workflow update --check
 agent-workflow update
 ```
 
-**Existing projects:** To add missing project-level always-on rule files, re-run `agent-workflow install --tool cursor --language zh-CN` after the v0.2.0 Release is published. This skips existing files. It does **not** replace customized `.agent-workflow/user-preferences.md` with the new default template; merge desired starter preferences manually.
+**Existing projects:** To add missing project-level always-on rule files, re-run `agent-workflow install --tool cursor --language zh-CN` using v0.2.0 or later. This skips existing files. It does **not** replace customized `.agent-workflow/user-preferences.md` with the new default template; merge desired starter preferences manually.
 
 ## Validation and known limitations
 
-- Python installer, CLI, and updater checks passed in GitHub Actions on the merged feature PR and `main`; confirm the same on this release candidate.
+- Python installer, CLI, and updater tests passed in GitHub Actions on the merged feature PR and `main`. A manual CLI upgrade and fresh installation in a Cursor project also completed.
 - Full live Cursor/Claude Code and upgrade/rollback end-to-end testing remains incomplete by choice. These release notes do **not** claim that behavior is verified across client versions.
 - Writing/deployment/database permissions are unchanged: `execute` respects the project rules and requires appropriate authorization.
-- The project has not yet selected an open-source license; availability on GitHub is not an open-source license grant.
+- This release predates the MIT License added during v0.2.1 preparation. For current licensing, refer to the repository's [LICENSE](../LICENSE).
 
 See [initialization](initialization.md), [quickstart](quickstart.md), and [upgrades](upgrading.md) for details.

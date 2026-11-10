@@ -1,9 +1,15 @@
 # Changelog
 
 All notable user-facing changes will be tracked here when publishing releases.
-Version tags should follow SemVer (`vMAJOR.MINOR.PATCH`) once the release process has been validated.
+Version tags follow SemVer (`vMAJOR.MINOR.PATCH`).
 
-## 0.2.0 — prepared for release (not yet published)
+## 0.2.1 — release preparation (not yet published)
+
+- Add MIT License and align package metadata for public reuse.
+- Update public onboarding and release documentation to match shipped v0.2.0 functionality.
+- Clarify early-access verification limitations and separate CLI vs. Skill upgrades.
+
+## 0.2.0 — published 2026-11-10
 
 - New installations seed an editable, generalized RMA-derived response baseline instead of a blank preference template, plus non-overwriting always-on project rules for Cursor and Claude Code.
 - Answer defaults emphasize business consequences, concise structured explanations, and task-appropriate response patterns.
@@ -29,9 +35,9 @@ Version tags should follow SemVer (`vMAJOR.MINOR.PATCH`) once the release proces
 ### Validation originally tracked for this release (not all complete)
 
 - [x] Confirm installer, updater and CLI automated tests pass in the previously inspected GitHub Actions run (#39).
-- [ ] Confirm tests still pass for the final release commit.
+- [x] Confirm tests pass for the final release commit.
 - [ ] Manually smoke-test the full lifecycle in a fresh Cursor project.
 - [ ] Manually smoke-test the full lifecycle in a fresh Claude Code project.
 - [ ] Verify conflicting local customizations and rollback in both.
-- [ ] Choose and add an explicit license.
-- [ ] Publish an initial version tag after validation.
+- [ ] License added in v0.2.1 preparation; not part of the original v0.1.0 tag.
+- [x] Publish an initial version tag.
