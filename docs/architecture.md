@@ -1,24 +1,24 @@
 # Architecture (V1 design)
 
-## Five manually triggered stages
+## Five independently invocable Skills
 
 | Stage | Purpose | Handoff | Stop condition |
 |---|---|---|---|
 | Learn Requirement | Interpret the user request, without proposing implementation | Intended user-visible outcome, constraints, open questions | Request is unclear; do not guess |
 | Investigate | Trace observed behavior to evidence and assess impact | Evidence, root cause or uncertainties, affected scope | Insufficient access/evidence; no data changes |
-| Make Plan | Present verifiable outcomes and options, recommend a bounded approach | Approved outcomes, approach, exclusions, validation | Explicit approval absent; no implementation |
-| Execute | Implement only the approved plan, respecting project rules | Changes, verification, remaining risks | Missing approval, unsafe operation or conflicting constraints |
+| Make Plan | Plan from a new request **or** previous findings; recommend a bounded approach | Proposed outcomes, alternatives, exclusions, validation | Stops without implementing; material ambiguity identified |
+| Execute | Act on direct explicit instructions **or** an approved plan, respecting project rules | Changes, verification, remaining risks | Insufficient authorization, unsafe operation, or conflicting constraints |
 | Review Skill | Assess observed gaps and propose instruction updates | Categorized findings, exact proposed edits, test cases | Human has not approved changes; never self-edit |
 
-A stage may be invoked independently when sufficient prior context exists. No orchestration or automatic transition is included in V1.
+Every Skill can be invoked on its own, including from the user's current request alone; prior Skill calls are never prerequisites. Conversation context is reused when available. No orchestration or automatic transition is included in V1.
 
 ## Configuration layers
 
 1. **Core Skills**: general process and review criteria, shared across projects.
 2. **Project rules**: allowed tools, environments, security and deployment constraints; the project owner owns these.
-3. **User preferences**: communication language, ordering, preferred vocabulary, forbidden phrasings; the user owns these.
+3. **User preferences**: starts with generalized RMA-derived response defaults, then evolves through the user's approved corrections; the user owns these. The selected language stays in a separate local file.
 
-Skills must read applicable project constraints and preferences when they exist. Templates are not globally binding defaults.
+The installer copies **ready-to-use defaults** at first install. Skills read applicable project constraints and preferences. Defaults become binding **for those Skills in that installed project**, not globally for agents outside it. The installer and updater must not overwrite preferences or other local customizations.
 
 ## Review boundaries
 
