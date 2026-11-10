@@ -55,6 +55,17 @@ This roadmap distinguishes shipped configuration/instructions from features that
 
 **Success criterion:** Same core workflow works on both providers, with explicit and auditable approval for write actions.
 
+### 4. Reduce end-user runtime and installation dependencies
+
+- [ ] Provide a standalone cross-platform CLI executable for Windows, macOS, and Linux, so end users do not need to preinstall Python, pipx, or Git.
+- [ ] Keep the CLI isolated from the target project's Python interpreter, virtual environment, and dependency graph.
+- [ ] Design and test a simple first-install and upgrade flow with no repository clone required.
+- [ ] Sign releases or publish verifiable checksums and document the provenance/verification process.
+- [ ] Test installation, upgrades, conflict protection, and rollback across supported OSes and representative non-Python projects.
+- [ ] Document supported architectures, package manager options, and a fallback install method.
+
+**Success criterion:** A new user can install and update the workflow without configuring a Python runtime or changing their existing project's dependencies.
+
 ## Guiding principle
 
 **Make the agent adapt to the developer, reducing repeated corrections and handoffs over time.** Review should suggest an existing Skill update first, and a new project-local Skill only when there is a distinct recurring workflow with evidence. Both changes require human approval and verification. More Skills or fewer tokens are not goals if they degrade reliability.
