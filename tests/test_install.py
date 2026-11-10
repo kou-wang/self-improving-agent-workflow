@@ -27,6 +27,8 @@ class InstallerTests(unittest.TestCase):
         skills = self.project / ".cursor" / "skills"
         for name in installer.SKILLS:
             self.assertTrue((skills / name / "SKILL.md").is_file())
+        self.assertTrue((self.project / ".cursor/rules/agent-workflow.mdc").is_file())
+        self.assertIn("alwaysApply: true", (self.project / ".cursor/rules/agent-workflow.mdc").read_text(encoding="utf-8"))
         prefs = self.project / ".agent-workflow" / "user-preferences.md"
         starter = prefs.read_text(encoding="utf-8")
         # A first install is useful immediately; the defaults remain user-owned.
@@ -45,6 +47,20 @@ class InstallerTests(unittest.TestCase):
     def test_both_installs_one_copy(self):
         self.assertEqual(installer.install("both", self.project, True), 0)
         self.assertTrue((self.project / ".claude/skills/review-skill/SKILL.md").is_file())
+        self.assertTrue((self.project / ".claude/rules/agent-workflow.md").is_file())
+        self.assertTrue((self.project / ".cursor/rules/agent-workflow.mdc").is_file())
+        self.assertFalse((self.project / ".cursor/skills").exists())
+
+    def test_existing_rule_is_preserved(self):
+        rule = self.project / ".cursor/rules/agent-workflow.mdc"
+        rule.parent.mkdir(parents=True)
+        rule.write_text("my own always-on rule\n", encoding="utf-8")
+        self.assertEqual(installer.install("cursor", self.project, True), 0)
+        self.assertEqual(rule.read_text(encoding="utf-8"), "my own always-on rule\n")
+
+    def test_claude_only_installs_its_rule(self):
+        self.assertEqual(installer.install("claude", self.project, True), 0)
+        self.assertTrue((self.project / ".claude/rules/agent-workflow.md").is_file())
         self.assertFalse((self.project / ".cursor").exists())
 
     def test_language_options_and_preservation(self):
