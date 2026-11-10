@@ -13,9 +13,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ("learn-requirement", "investigate", "make-plan", "execute", "review-skill")
 CONFIG = ("project-rules.md", "user-preferences.md")
+LANGUAGES = ("en", "zh-CN", "zh-TW")
 
 
-def install(tool: str, target: Path, apply: bool) -> int:
+def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
+    if language not in LANGUAGES:
+        print(f"ERROR: unsupported language: {language}", file=sys.stderr)
+        return 2
     target = target.expanduser().resolve()
     if not target.is_dir():
         print(f"ERROR: project directory does not exist: {target}", file=sys.stderr)
@@ -38,6 +42,9 @@ def install(tool: str, target: Path, apply: bool) -> int:
             print(f"ERROR: missing template: {src}", file=sys.stderr)
             return 2
         jobs.append((src, cfg_root / name, False))
+
+    # Language is independent of the user preferences file and is never overwritten.
+    jobs.append((None, cfg_root / "language.md", False))
 
     print(f"Target: {target}")
     print(f"Mode: {'apply' if apply else 'dry-run'}; Tool: {tool}")
@@ -64,7 +71,7 @@ def install(tool: str, target: Path, apply: bool) -> int:
             # Exclusive creation avoids overwrite if another process creates it.
             try:
                 with dest.open("x", encoding="utf-8") as handle:
-                    handle.write(src.read_text(encoding="utf-8"))
+                    handle.write((f"# Agent response language\\nLanguage: {language}\\n" if src is None else src.read_text(encoding="utf-8")))
             except FileExistsError:
                 print(f"SKIP raced existing: {dest.relative_to(target)}")
                 continue
@@ -80,8 +87,9 @@ def main() -> int:
                         help="For both, install once to .claude/skills (also discoverable by Cursor)")
     parser.add_argument("--target", required=True, type=Path, help="Existing project directory")
     parser.add_argument("--apply", action="store_true", help="Write new files (otherwise dry-run only)")
+    parser.add_argument("--language", choices=LANGUAGES, default="en", help="Response language on first install (default: en)")
     args = parser.parse_args()
-    return install(args.tool, args.target, args.apply)
+    return install(args.tool, args.target, args.apply, args.language)
 
 
 if __name__ == "__main__":
