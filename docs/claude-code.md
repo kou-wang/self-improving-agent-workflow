@@ -9,9 +9,9 @@ python3 scripts/install.py --tool claude --target /path/to/project
 python3 scripts/install.py --tool claude --target /path/to/project --apply
 ```
 
-This creates project-local `.claude/skills/<name>/SKILL.md` and project-local configuration templates in `.agent-workflow/`. It never overwrites existing files.
+This creates project-local `.claude/skills/<name>/SKILL.md`, an always-on `.claude/rules/agent-workflow.md`, and editable RMA-derived user response defaults in `.agent-workflow/`. Existing files are never overwritten.
 
-Open **the target project** in Claude Code. Invoke `/learn-requirement`, `/investigate`, `/make-plan`, `/execute`, and `/review-skill` individually. Approve a plan explicitly before executing; Review always stops at proposals. If detection is stale, restart the Claude Code session and confirm the files exist.
+Open **the target project** in Claude Code. Invoke `/learn-requirement`, `/investigate`, `/make-plan`, `/execute`, and `/review-skill` individually. A direct clear instruction can invoke `execute` without any previous plan; if implementing a proposed plan, explicitly authorize it first. Review always stops at proposals. If detection is stale, restart the Claude Code session and confirm the files exist.
 
 For a project used by **both** Claude Code and Cursor, choose `--tool both`. The same `.claude/skills/` files are readable by Cursor, avoiding duplicated Skill definitions.
 

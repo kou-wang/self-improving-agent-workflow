@@ -56,13 +56,13 @@ Rollback refuses to overwrite edits made after the upgrade.
 
 ## Release policy and limitations
 
-- **No stable Release exists yet:** the CLI prints an error and makes no changes. Current source version `0.1.0-dev` is not considered stable.
+- **Stable Release `v0.1.0` is published.** The CLI installs/updates from the latest stable tagged source, not from an unreleased branch. RMA-derived defaults and always-on project rules in the ongoing change are available only after they ship in a subsequent stable Release.
 - GitHub Releases must be named `vMAJOR.MINOR.PATCH`, and their source archive must contain a matching `VERSION` file.
 - Release archives are downloaded over HTTPS and validated against a restricted list of filenames, sizes and sources before the installer reads them. This is **not a signed-release or supply-chain-attestation system**; trust in the repository and GitHub remains necessary.
 - Only **Skill source updates** are automatic. A new CLI implementation may require updating the pipx package separately.
 - GitHub API rate limits and offline operation may prevent the check; the CLI reports an error rather than silently using an arbitrary branch.
 - An existing local install created before version tracking may have unresolved conflicts; default is Keep Local.
 - The underlying multi-file updater currently writes files individually and can require manual recovery from a backup after abnormal termination; it is not a fully transactional upgrade.
-- Do not create a stable Release until end-to-end Cursor/Claude Code testing and CI pass.
+- Review CI and record any remaining Cursor/Claude Code compatibility or rollback limitations before publishing future releases.
 
 See [upgrading.md](upgrading.md) for conflict and version-state details.

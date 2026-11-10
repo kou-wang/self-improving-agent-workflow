@@ -19,6 +19,11 @@ def archive(version="1.2.3", missing=None, bad_version=False):
         ).encode()
     for name in cli.install_engine.CONFIG:
         data[f"templates/{name}"] = f"# {name}\n".encode()
+    if version != "0.1.0":
+        data["templates/cursor-rule.mdc"] = (
+            "---\nalwaysApply: true\n---\n# Initial response rule\n"
+        ).encode()
+        data["templates/claude-rule.md"] = b"# Initial response rule\n"
     if missing:
         del data[missing]
     buffer = io.BytesIO()
@@ -63,6 +68,7 @@ class CLITests(unittest.TestCase):
         state = json.loads((self.project / ".agent-workflow/install-state.json").read_text())
         self.assertEqual(state["version"], "1.2.3")
         self.assertIn("zh-TW", (self.project / ".agent-workflow/language.md").read_text())
+        self.assertTrue((self.project / ".cursor/rules/agent-workflow.mdc").is_file())
 
     def test_install_preview_is_read_only(self):
         with self.mock_release():
@@ -76,6 +82,19 @@ class CLITests(unittest.TestCase):
         with self.mock_release(payload=archive(bad_version=True)):
             self.assertEqual(cli.main(["install", "--tool", "cursor", "--target", str(self.project)]), 2)
         self.assertFalse((self.project / ".cursor").exists())
+
+    def test_legacy_release_remains_installable(self):
+        with self.mock_release(payload=archive(version="0.1.0"), tag="v0.1.0"):
+            self.assertEqual(cli.main(["install", "--tool", "cursor", "--target",
+                                       str(self.project)]), 0)
+        self.assertTrue((self.project / ".cursor/skills/execute/SKILL.md").is_file())
+        self.assertFalse((self.project / ".cursor/rules").exists())
+
+    def test_missing_new_rule_rejected(self):
+        with self.mock_release(payload=archive(missing="templates/claude-rule.md")):
+            self.assertEqual(cli.main(["install", "--tool", "claude", "--target",
+                                       str(self.project)]), 2)
+        self.assertFalse((self.project / ".claude").exists())
 
     def test_incomplete_release_rejected(self):
         with self.mock_release(payload=archive(missing="skills/review-skill/SKILL.md")):

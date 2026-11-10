@@ -29,15 +29,15 @@ Before responding, follow any available, applicable project-specific instruction
 
 ## Output / handoff
 
-Start with a one- or two-sentence statement of the request in business or user-facing terms.
+Lead with **what the requester wants**, in one or two plain-language sentences: who, where, what behavior, and what happens afterward. Then use these short sections when they add value:
 
-- **Requested outcome:** Who should be able to do what, in which context, and what should happen afterward.
-- **Current behavior (if supported):** What is currently visible or verified, without attributing an unverified cause.
-- **Problem to solve:** What is blocked, missing, or confusing for the requester.
-- **Scope and constraints:** One-time versus ongoing, explicit exclusions, and any relevant acceptance conditions.
-- **Open questions (only if needed):** Unknowns that materially change the meaning.
+- **Current situation:** What the user sees or what existing behavior has actually been verified.
+- **Problem to solve:** What is missing or blocked, and what would become possible after the change.
+- **Scope / question (only if material):** One-time versus ongoing, a supported exclusion, or a single ambiguity that changes the requirement.
 
-The resulting statement is the input to a later investigation or planning stage. Do **not** claim those stages have run.
+Prefer the project's RMA-derived response defaults in `.agent-workflow/user-preferences.md`; if the user has customized them, those choices win. Do not pad the response with headings or technical implementation detail.
+
+This Skill is **standalone**. Its result may inform later discussion, planning, or execution, but none of those Skills is required to have run, and invoking this Skill does not invoke them.
 
 ## Guardrails
 

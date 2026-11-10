@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 # Review Skill
 
-Review what **actually happened** against the instructions **actually in effect**. Help the agent adapt to its developer over repeated real tasks, so the developer spends less time repeating corrections, clarifying conventions, or manually prompting routine workflows. Identify reusable fixes without turning a one-time incident into a universal rule. The number of Skills may grow when a proven, distinct recurring workflow justifies a new one; growth is not itself a goal.
+Review what **actually happened** against the instructions **actually in effect**. Its primary purpose is to **reduce unnecessary developer input and repeated interaction** while improving the usefulness of Agent responses. Adapt the Agent to developer-preferred structure, depth, wording, and explanation order as well as workflow steps. Shorter responses alone are not success: retain all information needed for understanding and decisions. Identify reusable fixes without turning a one-time incident into a universal rule. The number of Skills may grow when a proven, distinct recurring workflow justifies a new one; growth is not itself a goal.
 
 **This stage is proposal-only. Do not edit Skill files, rules, preferences, tests, or any other files; do not commit, push, or execute corrective actions.** Human approval and a separate execution step are required for every proposed change.
 
@@ -17,10 +17,10 @@ Review what **actually happened** against the instructions **actually in effect*
 
 ## 1. Establish review scope and evidence
 
-1. Identify Skills **actually used in this conversation**, including Skills supplied by the user. Do not review every installed Skill by default. A Skill merely discussed, proposed, or installed is not necessarily used.
+1. Identify Skills **actually used in this conversation**, including Skills supplied by the user. Also examine **real user-agent interactions that used no Skill** when they demonstrate a communication preference or a candidate new workflow; do not require a Skill to have been invoked. Do not review every installed Skill by default. A Skill merely discussed, proposed, or installed is not necessarily used.
 2. Re-read the **current contents** of each in-scope Skill, including linked instructions actually governing its behavior. Do not rely on remembered or summarized versions.
 3. Read applicable **project rules**, **user preferences**, and `.agent-workflow/language.md` if available. Do not assume a file or convention exists. Identify the actual instruction source for each behavior.
-4. Collect concrete evidence from the accessible conversation, task artifacts, observed edits, test results, and explicit user corrections. For each candidate issue, identify the behavior, intended outcome, and evidence of mismatch.
+4. Collect concrete evidence from the accessible conversation, task artifacts, observed edits, test results, and explicit user corrections. Pay special attention to cases where the developer had to **repeat context, restate a preference, correct a confusing explanation, repair a handoff, or prompt for an obvious next detail**. For each candidate, identify the observed behavior, intended outcome, and evidence of mismatch. Do not confuse useful clarification or a genuinely new decision with wasted interaction.
 5. If conversation history, files, execution results, or instruction versions are unavailable, disclose the gap. Do not claim complete review or infer a missing event.
 6. If an instruction was updated during the conversation, compare the observation against its **latest text**. Do not propose a fix already present there. If the behavior preceded the update, distinguish that timing.
 
@@ -36,7 +36,7 @@ For each observed issue:
 - **Already resolved:** Does the current instruction already cover the correction?
 - **One-off exception:** Was it an isolated request or a preference the user later withdrew?
 
-Prefer **no change** for unverified, already-covered, withdrawn, or one-time behavior. Only propose a change that follows from evidence and has a concrete mechanism for avoiding recurrence.
+Prefer **no change** for unverified, already-covered, withdrawn, or one-time behavior. Only propose a change that follows from evidence and has a concrete mechanism for avoiding recurrence. A developer may deliberately refine response style over multiple reviews; preserve previous approved preferences unless the developer supersedes them. New feedback should update the **existing** local preference rather than accumulating contradictory rules.
 
 ## 3. Route findings to the right ownership layer
 
@@ -61,7 +61,7 @@ For each accepted candidate finding, provide:
 2. **Root cause assessment:** Instruction gap, instruction not followed, conflicting rules, missing context, or unknown. Do not assert a root cause unsupported by evidence.
 3. **Classification and target:** Response / Process / Outcome; core Skill / project rules / user preferences, with the actual file path if known.
 4. **Exact suggested change:** For an update, quote or paraphrase the smallest addition/replacement and location. For a new Skill, propose its name, destination (`.cursor/skills/<name>/SKILL.md` or `.claude/skills/<name>/SKILL.md`), description/trigger, inputs, steps, outputs, approval gates, and an initial SKILL.md draft. Minimize contradictions and duplication.
-5. **Interaction cost:** Explain what repeated question, correction, or manual handoff this would eliminate and what user control remains. Do not invent time-savings metrics.
+5. **Interaction cost:** Explain exactly which repeated input, formatting correction, clarification, or manual handoff this would avoid and what user control remains. Prefer a small concrete before/after example where helpful. Do not invent time-savings metrics or optimize solely for response length.
 6. **Risks and counterexample:** Describe a different case in which the new rule should **not** apply, to avoid overgeneralization.
 7. **Verification plan:** Define a reproducible scenario based on the issue, expected behavior, and a check for conflict with existing rules. Explicitly distinguish:
    - **Static check:** The intended instruction exists and conflicts are absent.
@@ -80,7 +80,7 @@ Do not claim behavioral or outcome verification from static text inspection.
 
 ## Report format
 
-Follow applicable communication preferences. Lead with findings that **still need action**; if none, state that clearly.
+Follow applicable communication preferences (the installed RMA-derived defaults unless customized). Lead with findings that **still need action**; if none, state that clearly. Prefer one concise, actionable proposal over a long audit. Include full replacement Skill content only when proposing a new Skill or when requested; avoid repeating the same reasoning across headings.
 
 ### Proposed changes (approval required)
 

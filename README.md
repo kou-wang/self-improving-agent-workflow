@@ -2,9 +2,9 @@
 
 **Make your coding agent adapt to you—not the other way around.** A human-in-the-loop workflow that learns from concrete developer feedback by proposing updates to existing Skills **or creation of new project-specific Skills**. The goal is to reduce repetitive corrections, explanations, and developer-agent interaction over time. Supports **Cursor** and **Claude Code**.
 
-**Start here: [New user Quickstart](docs/quickstart.md) · [CLI setup / updates](docs/cli.md)** — clone, install, configure, use all five stages, and review proposed improvements.
+**Start here: [New user Quickstart](docs/quickstart.md) · [Initialization defaults](docs/initialization.md) · [CLI setup / updates](docs/cli.md)** — install a useful starter Skill set, invoke any Skill independently, and personalize it through approved review.
 
-## Recommended CLI workflow (after the first stable Release)
+## Recommended CLI workflow (stable releases)
 
 Install the CLI once:
 
@@ -19,7 +19,7 @@ agent-workflow install --tool cursor --language zh-CN
 agent-workflow update
 ```
 
-No recurring `git pull` is needed for Skill updates. **There is no stable GitHub Release yet**, so release-based installation/updates currently report a clear error. This is intentionally not a production-ready promise; see [CLI documentation](docs/cli.md).
+No recurring `git pull` is needed for Skill updates. Stable Release `v0.1.0` exists; **the initialization refinements in this change are unreleased until another stable tag**. See [CLI documentation](docs/cli.md).
 
 ## Legacy development install (preview first)
 
@@ -53,24 +53,29 @@ python3 scripts/update.py --target /path/to/your-project --check
 python3 scripts/update.py --target /path/to/your-project --apply
 ```
 
-Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **Current version: pre-release; no stable release tag yet.**
+Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **The current tagged Release is `v0.1.0`. Changes after that tag are not distributed by `agent-workflow update` until the next stable Release.**
 
-## Workflow
+## Initialization and flexible workflow
 
-`Learn Requirement → Investigate → Make Plan → Execute → Review Skill`
+New installations include **five ready-to-use independent Skills**, **RMA-derived response defaults** (business impact first, conclusion first, concise structured explanation, task-specific response patterns), and a small always-on Cursor/Claude project rule so those defaults apply even in ordinary chats. These defaults are generalized: no internal RMA business rules, infrastructure, or data are shipped. The developer can refine them repeatedly through `review-skill`. See [Initialization defaults](docs/initialization.md).
 
-1. **Learn Requirement** — establish what success looks like, without implementation proposals.
-2. **Investigate** — trace actual evidence, root cause, and affected scope, without writes.
-3. **Make Plan** — present bounded, verifiable outcomes; stop for approval.
-4. **Execute** — implement only approved outcomes, verify results; no commit/push by default.
-5. **Review Skill** — examine real friction and failures, propose an update to an existing Skill or a **new project-local Skill** when a distinct repeated workflow warrants one. The developer approves before any file change.
+A common but **optional** path is:
 
-Stages have **no automatic orchestration**. `investigate` may be selected automatically; the other four require explicit invocation. Review proposals require human approval and separately authorized application. The agent becomes better tailored through approved, persisted project Skills—not automatic unattended learning.
+`Bug / feature feedback → /investigate or /learn-requirement → discussion → /make-plan → /execute`
+
+- **Learn Requirement:** explain the desired user-visible behavior; no code change.
+- **Investigate:** trace the actual problem and practical impact; read-only.
+- **Make Plan:** use either direct input or relevant conversation findings; recommend one feasible approach and meaningful alternatives.
+- **Execute:** act on a **clear direct instruction** or an approved plan, with permissions and safety checks; it does **not** require a prior planning Skill.
+- **Review Skill:** learn from real corrections about **response quality** and **avoidable user interaction**; propose preference updates, existing Skill changes, or justified new project-local Skills.
+
+No mandatory stage order or automatic orchestration exists. All Skills can be invoked independently. Project/data/production safety gates still apply. Review proposals require human approval and separately authorized application; updates never silently replace local customizations.
 
 ## Layout
 
 - [`skills/`](skills/) — one canonical copy of each Skill
 - [`docs/quickstart.md`](docs/quickstart.md) — complete onboarding and smoke test
+- [`docs/initialization.md`](docs/initialization.md) — starter Skills, RMA-derived expression defaults, and personalization
 - [`scripts/install.py`](scripts/install.py) — dry-run-first, non-overwriting project installer
 - [`scripts/update.py`](scripts/update.py) — version-aware upgrade with conflict protection and rollback
 - [`agent_workflow/cli.py`](agent_workflow/cli.py) — `agent-workflow` CLI using stable GitHub Releases
@@ -91,7 +96,7 @@ See [TODO.md](TODO.md) for upcoming work, including **token efficiency**, **conf
 
 ## Project status
 
-Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. The CLI's release-dependent operations cannot run until a stable Release is published. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
+Five Skills, an onboarding installer, and a packaged GitHub Releases CLI exist in the repository. Stable Release `v0.1.0` is published, but this branch's new initialization defaults are not yet part of a stable Release. Full Claude Code behavior and upgrade/rollback regression coverage remain incomplete; do not treat the workflows as certified for every client version.
 
 ## License
 

@@ -50,6 +50,27 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
             return 2
         jobs.append((src, cfg_root / name, False))
 
+    # Always-on project rules make preferences effective even without a Skill.
+    # Do not touch existing rules: project owners may have customized them.
+    rule_jobs = []
+    if tool in ("cursor", "both"):
+        rule_jobs.append(("cursor-rule.mdc", ".cursor/rules/agent-workflow.mdc"))
+    if tool in ("claude", "both"):
+        rule_jobs.append(("claude-rule.md", ".claude/rules/agent-workflow.md"))
+    # v0.1.0 release archives predate always-on rules. They remain installable
+    # with an upgraded CLI; mixed/incomplete template sets fail closed.
+    rule_available = [(ROOT / "templates" / name).is_file()
+                      for name in ("cursor-rule.mdc", "claude-rule.md")]
+    if any(rule_available) and not all(rule_available):
+        print("ERROR: incomplete response rule templates", file=sys.stderr)
+        return 2
+    if all(rule_available):
+        for template_name, relative_dest in rule_jobs:
+            src = ROOT / "templates" / template_name
+            jobs.append((src, target / relative_dest, False))
+    elif rule_jobs:
+        print("NOTE: this legacy release has no always-on response rule templates.")
+
     # Language is independent of the user preferences file and is never overwritten.
     jobs.append((None, cfg_root / "language.md", False))
 
