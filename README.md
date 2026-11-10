@@ -26,6 +26,18 @@ python3 scripts/set_language.py --target /path/to/your-project --language zh-TW 
 
 Only `.agent-workflow/language.md` is changed; personal preferences and existing Skills are preserved. Restart the agent session if necessary. Exact identifiers and requested terminology are not translated.
 
+## Safe upgrades
+
+Update the source checkout, preview the managed Skill changes, then apply:
+
+```bash
+git pull --ff-only
+python3 scripts/update.py --target /path/to/your-project --check
+python3 scripts/update.py --target /path/to/your-project --apply
+```
+
+Locally edited official Skills are kept by default; custom Skills and your language/preferences are not touched. Each applied update creates a backup with a rollback ID. See [Upgrade and rollback guide](docs/upgrading.md) for conflict handling, manual merging, and rollback. **Current version: pre-release; no stable release tag yet.**
+
 ## Workflow
 
 `Learn Requirement → Investigate → Make Plan → Execute → Review Skill`
@@ -43,6 +55,7 @@ Stages have **no automatic orchestration**. `investigate` may be selected automa
 - [`skills/`](skills/) — one canonical copy of each Skill
 - [`docs/quickstart.md`](docs/quickstart.md) — complete onboarding and smoke test
 - [`scripts/install.py`](scripts/install.py) — dry-run-first, non-overwriting project installer
+- [`scripts/update.py`](scripts/update.py) — version-aware upgrade with conflict protection and rollback
 - [`templates/`](templates/) — project-local rules and user preferences
 - [`docs/architecture.md`](docs/architecture.md) — stage contracts and boundaries
 - [`docs/review-design.md`](docs/review-design.md) — review categories and validation
