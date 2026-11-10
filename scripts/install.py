@@ -6,6 +6,8 @@ Dry-run by default. Does not overwrite or delete any existing file.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -13,6 +15,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ("learn-requirement", "investigate", "make-plan", "execute", "review-skill")
 CONFIG = ("project-rules.md", "user-preferences.md")
+STATE = "install-state.json"
+
+
+def hash_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 LANGUAGES = ("en", "zh-CN", "zh-TW")
 
 
@@ -76,6 +83,26 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
                 print(f"SKIP raced existing: {dest.relative_to(target)}")
                 continue
         copied += 1
+    # Track only files installed or byte-identical to source.
+    state_path = cfg_root / STATE
+    if state_path.is_symlink():
+        print("WARNING: symlinked install-state.json; not writing it", file=sys.stderr)
+    elif not state_path.exists():
+        managed = {}
+        for name in SKILLS:
+            source = ROOT / "skills" / name / "SKILL.md"
+            installed = root / name / "SKILL.md"
+            if installed.is_file() and not installed.is_symlink() and hash_file(installed) == hash_file(source):
+                managed[name] = hash_file(source)
+        record = {"schema": 1, "version": (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
+                  "tool": tool, "managed": managed}
+        try:
+            with state_path.open("x", encoding="utf-8") as handle:
+                json.dump(record, handle, indent=2, sort_keys=True)
+                handle.write("\n")
+            print("Created installation state for safe future upgrades.")
+        except FileExistsError:
+            print("SKIP existing installation state.")
     print(f"\nInstalled {copied} items; skipped {len(blocked)} pre-existing items.")
     print("Read .agent-workflow/project-rules.md and user-preferences.md, then follow docs/quickstart.md.")
     return 0
