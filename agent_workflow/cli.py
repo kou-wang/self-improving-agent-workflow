@@ -81,6 +81,11 @@ def _release_tree(tag: str, archive_url: str, root: Path) -> None:
     needed = {"VERSION"}
     needed.update(f"skills/{name}/SKILL.md" for name in SKILLS)
     needed.update(f"templates/{name}" for name in install_engine.CONFIG)
+    # Release v0.1.0 predates the always-on project rule templates.
+    # Every subsequent release must include both; do not silently accept
+    # an incomplete new release archive.
+    if tag != "v0.1.0":
+        needed.update(("templates/cursor-rule.mdc", "templates/claude-rule.md"))
     found = {}
     total = 0
     with tarfile.open(fileobj=io.BytesIO(source), mode="r:gz") as archive:
