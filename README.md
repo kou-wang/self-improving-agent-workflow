@@ -1,52 +1,55 @@
 # Self-Improving Agent Workflow
 
-A human-controlled, review-driven workflow for AI coding agents.
+An evidence-driven, human-in-the-loop workflow for AI coding agents, currently supporting **Cursor** and **Claude Code**.
 
-**Status: foundation scaffold (not yet a working Skill package).** The five Skills and review evaluation logic will be migrated in subsequent steps. Currently targeting **Cursor** and **Claude Code** only.
+**Start here: [New user Quickstart](docs/quickstart.md)** — clone, install, configure, use all five stages, and review proposed improvements.
 
-## Concept
+## Install (preview first)
+
+```bash
+git clone https://github.com/kou-wang/self-improving-agent-workflow.git
+cd self-improving-agent-workflow
+python3 scripts/install.py --tool cursor --target /path/to/your-project
+python3 scripts/install.py --tool cursor --target /path/to/your-project --apply
+```
+
+Use `--tool claude` for Claude Code, or `--tool both` to share one install in a project that uses both tools. The installer **never overwrites** existing Skills or local configuration. It requires only Python 3 and an existing project directory. See the [Quickstart](docs/quickstart.md) for the end-to-end process.
+
+## Workflow
 
 `Learn Requirement → Investigate → Make Plan → Execute → Review Skill`
 
-Every stage is invoked intentionally, not automatically chained. The review stage identifies issues grounded in the actual conversation and work outcome, proposes targeted improvements, and requires human approval before changing any instruction.
+1. **Learn Requirement** — establish what success looks like, without implementation proposals.
+2. **Investigate** — trace actual evidence, root cause, and affected scope, without writes.
+3. **Make Plan** — present bounded, verifiable outcomes; stop for approval.
+4. **Execute** — implement only approved outcomes, verify results; no commit/push by default.
+5. **Review Skill** — inspect actual usage and user corrections, propose targeted improvements; stop before editing.
 
-## Design principles
+Stages have **no automatic orchestration**. `investigate` may be selected automatically; the other four require explicit invocation. Review proposals require human approval and separately authorized application. No automatic persistent learning is claimed.
 
-- **Evidence before changes:** Do not extrapolate an incident into a universal rule.
-- **Approval gates:** Planning stops before implementation; review proposes changes without applying them.
-- **Separation of concerns:** Shared Skills, project constraints, and personal response preferences live separately.
-- **No implicit side effects:** No push, commit, deployment, or data mutation without project-specific authorization.
-- **Verify revisions:** A proposed fix needs at least one concrete regression scenario and an explicit verification result.
-- **Honest boundaries:** Chat history may be incomplete. No automatic learning or improvement is promised without a supported implementation.
+## Layout
 
-## Repository layout
+- [`skills/`](skills/) — one canonical copy of each Skill
+- [`docs/quickstart.md`](docs/quickstart.md) — complete onboarding and smoke test
+- [`scripts/install.py`](scripts/install.py) — dry-run-first, non-overwriting project installer
+- [`templates/`](templates/) — project-local rules and user preferences
+- [`docs/architecture.md`](docs/architecture.md) — stage contracts and boundaries
+- [`docs/review-design.md`](docs/review-design.md) — review categories and validation
+- [`docs/cursor.md`](docs/cursor.md) / [`docs/claude-code.md`](docs/claude-code.md) — tool-specific details
+- [`tests/review-scenarios/`](tests/review-scenarios/) — planned regression scenarios
 
-```text
-skills/                     # Canonical Skill definitions (coming next)
-templates/user-preferences.md
-                           # Project-local response preferences template
-templates/project-rules.md # Project constraints template
-docs/architecture.md       # Stages, boundaries, and handoffs
-docs/review-design.md      # Review issue taxonomy and approval process
-docs/cursor.md             # Cursor installation design
-docs/claude-code.md        # Claude Code installation design
-tests/review-scenarios/    # Regression cases (coming next)
-scripts/                   # Optional installer (not yet implemented)
-```
+## Principles
 
-## Roadmap
+Evidence before rules; meaningful approvals before writes; project constraints separate from reusable Skills; no destructive overwrite during installation; verification reports distinguish static checks, behavioral checks and confirmed outcomes.
 
-1. ✅ Inventory existing Cursor Skills and design a public foundation.
-2. ☐ Extract five generic Skills without proprietary content.
-3. ☐ Add review proposal format, approval, and verification cases.
-4. ☐ Validate installation and manual invocation in Cursor.
-5. ☐ Validate installation and manual invocation in Claude Code.
-6. ☐ Add CI checks and publish a tested release.
+## Project status
 
-## Security and provenance
-
-This repository must not contain the source project's `.cursor` directory, internal infrastructure details, code, credentials, or private conversation excerpts. The public package is rewritten from generalized behavior, not copied wholesale from the source project.
+Five Skills and an onboarding installer exist in the repository. Compatibility smoke tests in real Cursor and Claude Code sessions and regression tests are **not yet completed**. Do not treat this as a certified stable release.
 
 ## License
 
-License pending author selection. Do not redistribute as an open-source licensed project until a license is chosen and added.
+License selection pending. No open-source license granted until a license is explicitly added.
+
+## Security
+
+Do not publish proprietary instructions, private chat transcripts, internal systems, credentials or company data in issues or examples.
