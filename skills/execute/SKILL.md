@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 Carry out the **approved outcomes**, within the agreed scope and the project's permissions. Implement the selected approach, verify observable results, and report exactly what did and did not happen. Do not reopen the plan, quietly add adjacent work, or claim success based on an attempted action.
 
-**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` in the active project if present. Project rules never grant permission beyond actual tool or user authorization.
+**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md`, `.agent-workflow/user-preferences.md`, and `.agent-workflow/language.md` in the active project if present. Use `language.md` for the response language (`en` = English, `zh-CN` = Simplified Chinese, `zh-TW` = Traditional Chinese), while keeping code identifiers and user-specified exact terminology unchanged. Project rules never grant permission beyond actual tool or user authorization.
 
 ## Inputs and authority
 
