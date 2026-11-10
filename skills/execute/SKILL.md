@@ -1,22 +1,22 @@
 ---
 name: execute
 description: >-
-  Implement only the outcomes and approach explicitly approved in the conversation.
-  Use when the user explicitly asks to execute an agreed plan or make the
-  previously approved changes; do not treat a proposed plan as authorization.
+  Execute a direct, sufficiently specific user instruction or implement a
+  previously approved plan. Reuse relevant conversation decisions without
+  requiring any prior Skill; respect explicit permissions and safety gates.
 disable-model-invocation: true
 ---
 
 # Execute
 
-Carry out the **approved outcomes**, within the agreed scope and the project's permissions. Implement the selected approach, verify observable results, and report exactly what did and did not happen. Do not reopen the plan, quietly add adjacent work, or claim success based on an attempted action.
+Carry out **what the user has authorized**, within the stated scope and project permissions: either a direct actionable request or a previously selected plan. `execute` is **standalone**; it must not demand `make-plan` or `investigate` first. Reuse prior discussion when available, verify observable results, and report exactly what did and did not happen. Do not invent authorization, reopen agreed scope, or quietly add adjacent work.
 
 **Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md`, `.agent-workflow/user-preferences.md`, and `.agent-workflow/language.md` in the active project if present. Use `language.md` for the response language (`en` = English, `zh-CN` = Simplified Chinese, `zh-TW` = Traditional Chinese), while keeping code identifiers and user-specified exact terminology unchanged. Project rules never grant permission beyond actual tool or user authorization.
 
 ## Inputs and authority
 
-1. Read the latest relevant plan **and subsequent decisions or corrections** in the accessible conversation. The later explicit decision takes precedence over an earlier recommendation. If the history or plan is unavailable, do not invent approval.
-2. Identify separately: **approved outcomes**, the **approved approach**, **explicit exclusions**, and **success checks**. A recommendation is not approval. If several approaches remain open and the user has not selected one, stop and request a decision.
+1. Read the **current instruction** and relevant accessible history. If there is a plan, read the latest plan **and subsequent decisions or corrections**; a later explicit decision takes precedence. If there is **no prior plan**, work directly from a sufficiently specific user request and available project context. Never require another Skill just to prepare an artificial handoff.
+2. Identify **authorized outcomes**, constraints/exclusions, and observable success checks. If an earlier plan offers competing approaches, require a choice unless a subsequently accepted recommendation resolves it. For a direct implementation request with no selected plan, choose the smallest coherent, safe implementation consistent with the request and project conventions; ask only for a decision that materially changes scope, risk, or behavior. A proposed plan alone is not execution authorization.
 3. Read applicable project rules, permissions, and user response preferences. Project-specific rules determine allowed tools, repositories, branches, environments, data writes, approvals, and delivery conventions. This Skill grants no permissions.
 4. Before any potentially destructive, irreversible, production, external-system, or data-changing action, confirm that the specific action and target are authorized under the applicable rules. General permission to implement code does not authorize database writes, deployments, pushes, or releases.
 
@@ -56,11 +56,11 @@ Keep mixed outcomes separate: do not use one sentence to claim success and failu
 ## Stop conditions
 
 Stop at the relevant boundary and report rather than guessing when:
-- The approved plan, selected approach, scope, or target is missing or contradictory.
+- Neither a sufficiently specific direct instruction nor a previously approved plan establishes the change, scope, or target; or available instructions materially contradict one another.
 - Project rules require permission not yet granted.
 - An action would affect a prohibited environment, object, or side effect.
 - Proceeding would endanger unrelated work, data, or credentials.
 - New evidence invalidates the agreed plan or requires an additional outcome.
 - Verification reveals failure that cannot be repaired within the approved scope.
 
-**Handoff:** Provide the actual execution record for later `review-skill` use. Do not invoke review automatically or edit the shared Skills in response to an execution mistake.
+**Handoff:** Provide the actual execution record for optional later review. Do not invoke another Skill automatically or edit shared Skills in response to an execution mistake. Avoid making the user repeat decisions already present in the conversation.
