@@ -4,7 +4,7 @@
 
 **Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 
-This installs a **manual, human-approved workflow** designed to reduce developer-agent back-and-forth. Review may propose updates to existing Skills or creation of new project-local Skills based on real repeated needs; it does not silently change files. Review proposes changes; you approve them before any edit.
+This installs **five independent Skills and useful RMA-derived starter response preferences** (business-first, conclusion-first, concise and structured). They work immediately without a mandated Skill sequence. Review can propose edits to preferences, existing Skills, or new project-local Skills to reduce repeated developer input; it never silently changes files. See [Initialization defaults](initialization.md).
 
 ## 1. Get the workflow source
 
@@ -59,7 +59,9 @@ your-project/
     review-skill/SKILL.md
   .agent-workflow/
     project-rules.md
-    user-preferences.md
+    user-preferences.md  # prefilled, editable response defaults
+    language.md          # chosen response language
+    install-state.json   # managed core Skill hashes
 ```
 
 ### Switch language later
@@ -78,7 +80,7 @@ This changes only `.agent-workflow/language.md`, preserving your Skills and cust
 Edit the **local** files in the target project:
 
 1. `.agent-workflow/project-rules.md` — your project's permissions, environments, data protection, testing, and delivery rules. Be explicit about what must never be changed or published.
-2. `.agent-workflow/user-preferences.md` — response order, vocabulary, and phrasings to avoid.
+2. `.agent-workflow/user-preferences.md` — **already contains RMA-derived initial defaults** for concise, business-first answers across task types. Keep, edit, or replace these as your preferences evolve; you do not need to invent a response format before first use.
 3. `.agent-workflow/language.md` — selected response language, managed by the installer or switcher. This takes precedence over the language section of general preferences.
 
 These files belong to **you** and are never replaced by the installer on subsequent runs. Do not put passwords, access tokens, or sensitive production details in them.
@@ -87,7 +89,7 @@ These files belong to **you** and are never replaced by the installer on subsequ
 
 > Before using these workflow Skills, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md`, plus `.agent-workflow/language.md` if present. Treat project constraints as binding, and preserve user preferences in responses.
 
-For ongoing reliability, add that pointer to your project's existing `AGENTS.md` (Cursor) or `CLAUDE.md` (Claude Code) manually **after reviewing those files**. The installer deliberately does not edit them.
+For ongoing reliability—especially for conversations **without any Skill invocation**—add that pointer to your project's existing `AGENTS.md` (Cursor) or `CLAUDE.md` (Claude Code) manually **after reviewing those files**. Installed Skills already read the local configuration when invoked; the installer deliberately does not edit global instruction files.
 
 ## 4. Open the project in your agent
 
@@ -101,31 +103,25 @@ Try:
 
 If a slash command isn't visible, first verify that the installed `SKILL.md` file exists, that you opened the correct project root, and that your client supports project Skills.
 
-## 5. Walk through a safe sample issue
+## 5. Use any Skill independently
 
-Use an **illustrative, read-only** task in a project you control. For example:
+You can paste a PM feature request, error message, or screenshot and type only `/learn-requirement` or `/investigate`. The Agent should explain expected versus actual business behavior, cause and impact, and uncertainty **using your configured response style**, rather than forcing code-centric detail.
 
-> A user reports that clicking Save sometimes leaves the form unchanged. We have not confirmed why. First, only clarify the requirement. Do not edit files.
+A natural, **nonmandatory** workflow is:
 
-Invoke each stage **separately**, and confirm the handoff before the next.
+`User feedback → /investigate or /learn-requirement → short discussion → /make-plan → /execute`
 
-| Step | Command | Expected behavior |
-|---|---|---|
-| 1 | `/learn-requirement` | Describes desired user behavior, not a fix |
-| 2 | `/investigate` | Traces evidence and distinguishes confirmed facts from uncertainty; no writes |
-| 3 | `/make-plan` | Presents a bounded plan and **stops for your approval** |
-| 4 | `/execute` | Only after approving the exact changes; verifies them; no commit/push by default |
-| 5 | `/review-skill` | Uses observed conversation behavior to propose focused Skill/config improvements; **no files edited** |
+Use `/make-plan` directly when you already know what you want; it reads the available conversation and project context whether or not an earlier Skill ran. Use `/execute` directly for a sufficiently specific, authorized implementation request, or after approving an existing plan. **No Skill is a prerequisite for another.** Code changes remain uncommitted/unpushed by default; database, production, deployment, and other higher-risk actions still require their specific permissions.
 
-Skip execution for the first smoke test if you are not ready to approve a real change. The review can still assess the available stages, but must not invent an execution outcome.
+A safe read-only trial: `/investigate A user reports clicking Save sometimes leaves the form unchanged. Explain what is confirmed and what needs evidence; do not modify files.`
+
+You can subsequently discuss findings naturally, invoke planning or execute only when useful, then optionally invoke `/review-skill` to improve the Agent's recurring behavior.
 
 **Not every stage auto-runs:** The five Skills are intentionally separate. `investigate` currently permits automatic model selection by description; the other four are marked `disable-model-invocation: true`. If you prefer strict manual-only operation, add `disable-model-invocation: true` to the installed `investigate/SKILL.md` as a project-local choice.
 
 ## 6. Try the self-improvement loop
 
-After one real usage, say:
-
-> /review-skill Review only the Skills we actually used and concrete mistakes from this conversation. Classify each issue, show an exact proposed edit and a counterexample, and stop for my approval. Do not change any files.
+After a real interaction in which you corrected the Agent's wording, explanation order, or workflow, invoke `/review-skill`. It can learn from **ordinary conversations even when no other Skill was used**. The goal is fewer repeated prompts and better decisions, not simply shorter replies. It should first consider whether the correction belongs in `user-preferences.md`, an existing Skill, or a distinct new project Skill.
 
 Review suggestions are **not** self-applied. To adopt a proposal: approve exactly the desired edit(s) **or new Skill creation**, then separately authorize their application (for example by invoking `/execute` with the approved edit plan). Validate both the original case and an unrelated counterexample. When recurring work merits a new Skill, ask Review to specify the name, trigger, inputs, output, stop conditions, and expected reduction in repeated prompts. Keep new personal/project Skills in your target project, not in this public repository.
 
