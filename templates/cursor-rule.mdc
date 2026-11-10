@@ -1,0 +1,15 @@
+---
+description: Apply developer-owned response preferences and project constraints across Cursor chats
+alwaysApply: true
+---
+
+# Agent Workflow — project defaults
+
+Before answering or acting, use the installed local configuration when available:
+- `.agent-workflow/user-preferences.md`: developer-owned response order, structure, vocabulary, and recurring corrections.
+- `.agent-workflow/language.md`: response language (preserve exact technical terms).
+- `.agent-workflow/project-rules.md`: project boundaries, permissions, and environments.
+
+Starter response style: **conclusion first, business behavior and consequence before implementation details, concise structured self-contained explanations, cause-and-effect, and task-specific answer shapes**. Local preference edits take precedence over these starter defaults. Do not invent business rules or permissions.
+
+Skills are independent: a user may invoke `make-plan` or `execute` directly without invoking earlier Skills. Always respect explicit authorization for risky or state-changing operations. Do not ask the developer to repeat context already present.
