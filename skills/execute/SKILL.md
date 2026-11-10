@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 Carry out the **approved outcomes**, within the agreed scope and the project's permissions. Implement the selected approach, verify observable results, and report exactly what did and did not happen. Do not reopen the plan, quietly add adjacent work, or claim success based on an attempted action.
 
+**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` in the active project if present. Project rules never grant permission beyond actual tool or user authorization.
+
 ## Inputs and authority
 
 1. Read the latest relevant plan **and subsequent decisions or corrections** in the accessible conversation. The later explicit decision takes precedence over an earlier recommendation. If the history or plan is unavailable, do not invent approval.
