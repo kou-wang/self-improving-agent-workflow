@@ -1,6 +1,6 @@
 # Self-Improving Agent Workflow
 
-An evidence-driven, human-in-the-loop workflow for AI coding agents, currently supporting **Cursor** and **Claude Code**.
+**Make your coding agent adapt to you—not the other way around.** A human-in-the-loop workflow that learns from concrete developer feedback by proposing updates to existing Skills **or creation of new project-specific Skills**. The goal is to reduce repetitive corrections, explanations, and developer-agent interaction over time. Supports **Cursor** and **Claude Code**.
 
 **Start here: [New user Quickstart](docs/quickstart.md)** — clone, install, configure, use all five stages, and review proposed improvements.
 
@@ -9,11 +9,22 @@ An evidence-driven, human-in-the-loop workflow for AI coding agents, currently s
 ```bash
 git clone https://github.com/kou-wang/self-improving-agent-workflow.git
 cd self-improving-agent-workflow
-python3 scripts/install.py --tool cursor --target /path/to/your-project
-python3 scripts/install.py --tool cursor --target /path/to/your-project --apply
+python3 scripts/install.py --tool cursor --target /path/to/your-project --language zh-CN
+python3 scripts/install.py --tool cursor --target /path/to/your-project --language zh-CN --apply
 ```
 
 Use `--tool claude` for Claude Code, or `--tool both` to share one install in a project that uses both tools. The installer **never overwrites** existing Skills or local configuration. It requires only Python 3 and an existing project directory. See the [Quickstart](docs/quickstart.md) for the end-to-end process.
+
+## Language: one flag, three options
+
+Choose `--language en` (English), `--language zh-CN` (简体中文), or `--language zh-TW` (繁體中文) during installation. English is the default. To change later:
+
+```bash
+python3 scripts/set_language.py --target /path/to/your-project --language zh-TW
+python3 scripts/set_language.py --target /path/to/your-project --language zh-TW --apply
+```
+
+Only `.agent-workflow/language.md` is changed; personal preferences and existing Skills are preserved. Restart the agent session if necessary. Exact identifiers and requested terminology are not translated.
 
 ## Workflow
 
@@ -23,9 +34,9 @@ Use `--tool claude` for Claude Code, or `--tool both` to share one install in a 
 2. **Investigate** — trace actual evidence, root cause, and affected scope, without writes.
 3. **Make Plan** — present bounded, verifiable outcomes; stop for approval.
 4. **Execute** — implement only approved outcomes, verify results; no commit/push by default.
-5. **Review Skill** — inspect actual usage and user corrections, propose targeted improvements; stop before editing.
+5. **Review Skill** — examine real friction and failures, propose an update to an existing Skill or a **new project-local Skill** when a distinct repeated workflow warrants one. The developer approves before any file change.
 
-Stages have **no automatic orchestration**. `investigate` may be selected automatically; the other four require explicit invocation. Review proposals require human approval and separately authorized application. No automatic persistent learning is claimed.
+Stages have **no automatic orchestration**. `investigate` may be selected automatically; the other four require explicit invocation. Review proposals require human approval and separately authorized application. The agent becomes better tailored through approved, persisted project Skills—not automatic unattended learning.
 
 ## Layout
 
