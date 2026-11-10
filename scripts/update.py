@@ -166,7 +166,8 @@ def update(target: Path, apply: bool = False, use_upstream: set[str] | None = No
             if path.is_symlink() or path.parent.is_symlink() or not safe_file(path):
                 raise RuntimeError(f"Unsafe destination changed: {name}")
             old = path.read_bytes() if path.exists() else None
-            if digest(old) != item["current_hash"] if old is not None else item["current_hash"] is not None:
+            observed_hash = digest(old) if old is not None else None
+            if observed_hash != item["current_hash"]:
                 raise RuntimeError(f"Destination changed during update: {name}")
             if old is not None:
                 (backup / (name + ".before")).write_bytes(old)
@@ -203,7 +204,7 @@ def rollback(target: Path, backup_id: str, apply: bool) -> int:
     target = target.expanduser().resolve()
     config = target / ".agent-workflow"
     backup = config / "backups" / backup_id
-    if backup.is_symlink() or not (backup / "rollback.json").is_file():
+    if config.is_symlink() or (config / "backups").is_symlink() or backup.is_symlink() or (backup / "rollback.json").is_symlink() or not (backup / "rollback.json").is_file():
         print("ERROR: backup not found or unsafe", file=sys.stderr)
         return 2
     try:
