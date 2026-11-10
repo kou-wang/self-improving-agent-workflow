@@ -13,6 +13,8 @@ Review what **actually happened** against the instructions **actually in effect*
 
 **This stage is proposal-only. Do not edit Skill files, rules, preferences, tests, or any other files; do not commit, push, or execute corrective actions.** Human approval and a separate execution step are required for every proposed change.
 
+**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` in the active project if present. Project rules never grant permission beyond actual tool or user authorization.
+
 ## 1. Establish review scope and evidence
 
 1. Identify Skills **actually used in this conversation**, including Skills supplied by the user. Do not review every installed Skill by default. A Skill merely discussed, proposed, or installed is not necessarily used.
