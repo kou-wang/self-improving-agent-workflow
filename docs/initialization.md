@@ -9,6 +9,7 @@ A first install should work **before** the developer has trained any personalize
 - `.agent-workflow/project-rules.md`: a **blank project-policy template** to avoid assuming any environment, database, permission, or business rule.
 - `.agent-workflow/language.md`: chosen output language. Project terms and code identifiers remain exact.
 - `.agent-workflow/install-state.json`: managed core Skill hashes to protect local modifications during updates.
+- An **always-on project rule**: `.cursor/rules/agent-workflow.mdc` for Cursor, `.claude/rules/agent-workflow.md` for Claude Code, or both when using both tools. These point to editable preferences and carry a minimal default style even when no Skill is called.
 
 ## Default communication baseline
 
@@ -55,6 +56,6 @@ Optimization target: **fewer avoidable developer inputs/corrections**, better ex
 
 ## What upgrades do not overwrite
 
-The installer skips existing local paths. The official updater uses stored hashes: locally edited core Skills produce a **conflict** and are kept by default. It does **not** replace user preferences, project rules, language settings, or custom Skills. A developer may explicitly choose an upstream version of an individual core Skill after review, with a backup.
+The installer skips existing local paths, including the always-on project rules. It never replaces an existing root `AGENTS.md` or `CLAUDE.md`. The official updater uses stored hashes: locally edited core Skills produce a **conflict** and are kept by default. It does **not** replace user preferences, project rules, language settings, or custom Skills. A developer may explicitly choose an upstream version of an individual core Skill after review, with a backup.
 
-**Existing users:** A package update deliberately does **not** inject the new starter defaults into their customized `user-preferences.md`. Read the [template](../templates/user-preferences.md) and selectively merge only the defaults you want. No silent preference migration.
+**Existing users:** A package update deliberately does **not** inject the new starter defaults into their customized `user-preferences.md`. Read the [template](../templates/user-preferences.md) and selectively merge only the defaults you want. To add missing always-on rules without replacing local settings, run the installer again from a source or stable release that contains these templates. No silent preference migration. These edits remain **unreleased until a new stable tag** includes them.
