@@ -2,7 +2,7 @@
 
 **Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 
-This installs a **manual, human-approved workflow**, not an autonomous agent or background-learning service. Review proposes changes; you approve them before any edit.
+This installs a **manual, human-approved workflow** designed to reduce developer-agent back-and-forth. Review may propose updates to existing Skills or creation of new project-local Skills based on real repeated needs; it does not silently change files. Review proposes changes; you approve them before any edit.
 
 ## 1. Get the workflow source
 
@@ -16,6 +16,8 @@ cd self-improving-agent-workflow
 You do **not** need to copy this repository into the project you want to work on.
 
 ## 2. Install into your project
+
+Choose your response language at installation: `--language en` (English, default), `--language zh-CN` (简体中文), or `--language zh-TW` (繁體中文). Add the flag to **both** preview and apply commands.
 
 Replace `/absolute/path/to/your-project` with an **existing** project directory. The first command previews changes; the second actually installs:
 
@@ -58,18 +60,30 @@ your-project/
     user-preferences.md
 ```
 
+### Switch language later
+
+Use the dedicated switcher. Preview first; then apply:
+
+```bash
+python3 scripts/set_language.py --target /absolute/path/to/your-project --language zh-TW
+python3 scripts/set_language.py --target /absolute/path/to/your-project --language zh-TW --apply
+```
+
+This changes only `.agent-workflow/language.md`, preserving your Skills and custom preferences. Restart the agent session if needed. Language codes are `en`, `zh-CN`, `zh-TW`; code symbols and explicitly preserved terms should not be translated.
+
 ## 3. Configure your project (before first run)
 
-Edit the two **local** files in the target project:
+Edit the **local** files in the target project:
 
 1. `.agent-workflow/project-rules.md` — your project's permissions, environments, data protection, testing, and delivery rules. Be explicit about what must never be changed or published.
-2. `.agent-workflow/user-preferences.md` — answer language, response order, vocabulary, and phrasings to avoid.
+2. `.agent-workflow/user-preferences.md` — response order, vocabulary, and phrasings to avoid.
+3. `.agent-workflow/language.md` — selected response language, managed by the installer or switcher. This takes precedence over the language section of general preferences.
 
 These files belong to **you** and are never replaced by the installer on subsequent runs. Do not put passwords, access tokens, or sensitive production details in them.
 
 **Important:** The shipped Skills rely on reading applicable local instructions. At the beginning of your first conversation, instruct the agent explicitly:
 
-> Before using these workflow Skills, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` if present. Treat project constraints as binding, and preserve user preferences in responses.
+> Before using these workflow Skills, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md`, plus `.agent-workflow/language.md` if present. Treat project constraints as binding, and preserve user preferences in responses.
 
 For ongoing reliability, add that pointer to your project's existing `AGENTS.md` (Cursor) or `CLAUDE.md` (Claude Code) manually **after reviewing those files**. The installer deliberately does not edit them.
 
@@ -111,7 +125,7 @@ After one real usage, say:
 
 > /review-skill Review only the Skills we actually used and concrete mistakes from this conversation. Classify each issue, show an exact proposed edit and a counterexample, and stop for my approval. Do not change any files.
 
-Review suggestions are **not** self-applied. To adopt a proposal: approve exactly the desired edit(s), then separately authorize their application (for example by invoking `/execute` with the approved edit plan). Validate both the original case and an unrelated counterexample. Keep local preferences in your local project—not in this public repository.
+Review suggestions are **not** self-applied. To adopt a proposal: approve exactly the desired edit(s) **or new Skill creation**, then separately authorize their application (for example by invoking `/execute` with the approved edit plan). Validate both the original case and an unrelated counterexample. When recurring work merits a new Skill, ask Review to specify the name, trigger, inputs, output, stop conditions, and expected reduction in repeated prompts. Keep new personal/project Skills in your target project, not in this public repository.
 
 ## Troubleshooting and safety
 
