@@ -3,7 +3,7 @@
 All notable user-facing changes will be tracked here when publishing releases.
 Version tags should follow SemVer (`vMAJOR.MINOR.PATCH`) once the release process has been validated.
 
-## Unreleased — 0.1.0-dev
+## 0.1.0 — release candidate preparation (not yet published)
 
 - Five separate Skills: learn-requirement, investigate, make-plan, execute, review-skill.
 - Review proposes improvements to an existing Skill or a new project-local Skill, with explicit developer approval.
@@ -16,9 +16,10 @@ Version tags should follow SemVer (`vMAJOR.MINOR.PATCH`) once the release proces
 - Mocked offline CLI tests, including missing releases, unsafe release contents, and custom Skill preservation.
 - Automated Python regression test definitions.
 
-### Before the first stable release
+### Validation still required before publishing
 
-- [ ] Confirm automated installer and updater tests pass in CI.
+- [x] Confirm installer, updater and CLI automated tests pass in the previously inspected GitHub Actions run (#39).
+- [ ] Confirm tests still pass for the final release commit.
 - [ ] Manually smoke-test the full lifecycle in a fresh Cursor project.
 - [ ] Manually smoke-test the full lifecycle in a fresh Claude Code project.
 - [ ] Verify conflicting local customizations and rollback in both.
