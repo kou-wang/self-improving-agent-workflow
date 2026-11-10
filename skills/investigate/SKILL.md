@@ -13,6 +13,8 @@ Find out **what happened**, **why it happened**, **what is affected**, and **wha
 
 This stage investigates. It does **not** modify source code, database records, configuration, production state, or external services.
 
+**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` in the active project if present. Project rules never grant permission beyond actual tool or user authorization.
+
 ## Read project context first
 
 1. Read applicable project rules and user communication preferences if present. They determine terminology, permitted environments, data access, confidentiality, and reporting style.
