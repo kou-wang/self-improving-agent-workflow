@@ -8,7 +8,11 @@ This roadmap distinguishes shipped configuration/instructions from features that
 - [x] Review can **propose** editing an existing Skill or creating a new project-local Skill
 - [x] Three response language choices: `en` / `zh-CN` / `zh-TW`
 - [x] Safe, non-overwriting project installer and separate language switcher
-- [ ] Run installer unit tests and confirm CI on GitHub
+- [x] Add version file, installation manifest, offline safe updater, conflict protection and rollback
+- [ ] Run installer **and upgrade** unit tests and confirm CI on GitHub
+- [ ] Validate update/rollback against both Cursor and Claude Code projects
+- [ ] Publish semantic-versioned GitHub release tags and changelog for each release
+- [ ] Consider opt-in notification of newer upstream versions; current check uses local checkout only
 - [ ] End-to-end smoke test in a fresh Cursor project
 - [ ] End-to-end smoke test in a fresh Claude Code project
 - [ ] Validate Review proposals on real cases, including updates vs. new Skills
