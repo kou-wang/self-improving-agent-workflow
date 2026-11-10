@@ -127,6 +127,10 @@ After one real usage, say:
 
 Review suggestions are **not** self-applied. To adopt a proposal: approve exactly the desired edit(s) **or new Skill creation**, then separately authorize their application (for example by invoking `/execute` with the approved edit plan). Validate both the original case and an unrelated counterexample. When recurring work merits a new Skill, ask Review to specify the name, trigger, inputs, output, stop conditions, and expected reduction in repeated prompts. Keep new personal/project Skills in your target project, not in this public repository.
 
+## 7. Keep the workflow up to date
+
+Your custom Skills, project rules and preferences belong to you; the official core can be upgraded separately. After updating this repository checkout (`git pull --ff-only`), run `python3 scripts/update.py --target /absolute/path/to/your-project --check`, then `--apply` after reviewing changes. Conflicts default to **Keep Local**. The updater creates a backup ID for safe rollback. See [Upgrade and rollback](upgrading.md) for full examples and limitations.
+
 ## Troubleshooting and safety
 
 - **Skills not detected:** Check the selected directory and restart/reopen the project/session; inspect [Cursor](cursor.md) or [Claude Code](claude-code.md).
