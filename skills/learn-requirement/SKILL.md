@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 Turn a request into an accurate, concise, implementation-neutral description of the desired behavior. The purpose of this stage is to understand **what** the requester wants, not **how** to build it.
 
+**Local configuration:** Before following this Skill, read `.agent-workflow/project-rules.md` and `.agent-workflow/user-preferences.md` in the active project if present. Project rules never grant permission beyond actual tool or user authorization.
+
 ## Inputs
 
 Use the user's request, attached screenshots, referenced product context, and other accessible evidence. If materials are missing, say so rather than inventing details.
