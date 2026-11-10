@@ -71,7 +71,7 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
             # Exclusive creation avoids overwrite if another process creates it.
             try:
                 with dest.open("x", encoding="utf-8") as handle:
-                    handle.write((f"# Agent response language\\nLanguage: {language}\\n" if src is None else src.read_text(encoding="utf-8")))
+                    handle.write((f"# Agent response language\nLanguage: {language}\n" if src is None else src.read_text(encoding="utf-8")))
             except FileExistsError:
                 print(f"SKIP raced existing: {dest.relative_to(target)}")
                 continue
