@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 810" role="img" aria-labelledby="title description">
+<title id="title">Self-Improving Agent Workflow</title>
+<desc id="description">Five independently usable skills: learn-requirement, investigate, make-plan, execute and review-skill. Review-skill proposes preference, skill and project-local skill improvements with developer approval. Benefits: adaptable expression, fewer repeated interactions and reusable workflows.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F6F5FF"/></linearGradient><linearGradient id="strip" x1="0" y1="0" x2="1"><stop stop-color="#ECEEFF"/><stop offset="1" stop-color="#F6EAFF"/></linearGradient></defs>
+<rect width="1600" height="810" rx="36" fill="url(#bg)"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="800" y="83" font-size="54" font-weight="800" text-anchor="middle" fill="#0E1731">Self-Improving Agent Workflow</text>
+<text x="800" y="124" font-size="22" text-anchor="middle" fill="#64708C">Make your coding agent adapt to you — with five independent skills and an approved feedback loop.</text>
+<rect x="32" y="163" width="1536" height="323" rx="33" fill="#FFFFFF" stroke="#CFD8FF" stroke-width="2"/>
+<rect x="66" y="181" width="438" height="42" rx="21" fill="url(#strip)"/>
+<text x="88" y="209" font-size="23" font-weight="750" fill="#202D63">Five Core Skills</text>
+<text x="309" y="208" font-size="20" fill="#56618A">(use independently)</text>
+<rect x="1070" y="181" width="458" height="42" rx="21" fill="#F2EEFF"/>
+<text x="1299" y="208" font-size="18" text-anchor="middle" fill="#5E43AC">No rigid pipeline — call any skill you need</text>
+<g>
+<rect x="55" y="235" width="279" height="225" rx="25" fill="#EAF5FF" stroke="#A4D8FC" stroke-width="2"/>
+<circle cx="194" cy="294" r="31" fill="#FFFFFF" opacity=".9"/>
+<text x="194" y="305" font-size="35" text-anchor="middle" font-weight="750" fill="#208FDF">◎</text>
+<text x="194" y="367" font-size="23" font-weight="750" text-anchor="middle" fill="#101A33">learn-requirement</text>
+<text x="194" y="405" font-size="19" text-anchor="middle" fill="#33445B"><tspan x="194">Clarify what the</tspan><tspan x="194" dy="26">requester wants</tspan></text>
+</g>
+<g>
+<rect x="358" y="235" width="279" height="225" rx="25" fill="#E8FBF4" stroke="#A6E8CE" stroke-width="2"/>
+<circle cx="497" cy="294" r="31" fill="#FFFFFF" opacity=".9"/>
+<text x="497" y="305" font-size="35" text-anchor="middle" font-weight="750" fill="#10B981">⌕</text>
+<text x="497" y="367" font-size="23" font-weight="750" text-anchor="middle" fill="#101A33">investigate</text>
+<text x="497" y="405" font-size="19" text-anchor="middle" fill="#33445B"><tspan x="497">Explain bugs and</tspan><tspan x="497" dy="26">unexpected behavior</tspan></text>
+</g>
+<g>
+<rect x="661" y="235" width="279" height="225" rx="25" fill="#FFF5DE" stroke="#F8D88E" stroke-width="2"/>
+<circle cx="800" cy="294" r="31" fill="#FFFFFF" opacity=".9"/>
+<text x="800" y="305" font-size="35" text-anchor="middle" font-weight="750" fill="#E69C0C">☷</text>
+<text x="800" y="367" font-size="23" font-weight="750" text-anchor="middle" fill="#101A33">make-plan</text>
+<text x="800" y="405" font-size="19" text-anchor="middle" fill="#33445B"><tspan x="800">Turn a task into</tspan><tspan x="800" dy="26">an actionable plan</tspan></text>
+</g>
+<g>
+<rect x="964" y="235" width="279" height="225" rx="25" fill="#F0EAFF" stroke="#C9B7FF" stroke-width="2"/>
+<circle cx="1103" cy="294" r="31" fill="#FFFFFF" opacity=".9"/>
+<text x="1103" y="305" font-size="22" text-anchor="middle" font-weight="750" fill="#7751E8">&lt;/&gt;</text>
+<text x="1103" y="367" font-size="23" font-weight="750" text-anchor="middle" fill="#101A33">execute</text>
+<text x="1103" y="405" font-size="19" text-anchor="middle" fill="#33445B"><tspan x="1103">Carry out approved</tspan><tspan x="1103" dy="26">work safely</tspan></text>
+</g>
+<g>
+<rect x="1267" y="235" width="279" height="225" rx="25" fill="#F6EAFE" stroke="#DCB7FA" stroke-width="2"/>
+<circle cx="1406" cy="294" r="31" fill="#FFFFFF" opacity=".9"/>
+<text x="1406" y="305" font-size="35" text-anchor="middle" font-weight="750" fill="#934CD5">↻</text>
+<text x="1406" y="367" font-size="23" font-weight="750" text-anchor="middle" fill="#101A33">review-skill</text>
+<text x="1406" y="405" font-size="19" text-anchor="middle" fill="#33445B"><tspan x="1406">Learn from feedback</tspan><tspan x="1406" dy="26">and propose changes</tspan></text>
+</g>
+<path d="M1458 463 V505 Q1458 538 1422 538 H1265" fill="none" stroke="#9858E5" stroke-width="6" stroke-linecap="round"/>
+<path d="M1265 538 l14 -9 v18 z" fill="#9858E5"/>
+<path d="M341 623 H179 Q145 623 145 589 V486" fill="none" stroke="#8178F6" stroke-width="6" stroke-linecap="round"/>
+<path d="M145 486 l-10 18 h20 z" fill="#8178F6"/>
+<rect x="286" y="510" width="1030" height="156" rx="30" fill="#F2F0FF" stroke="#C7B8FF" stroke-width="2"/>
+<rect x="542" y="491" width="518" height="46" rx="23" fill="#FFFFFF" stroke="#C7B8FF" stroke-width="2"/>
+<text x="801" y="521" font-size="24" text-anchor="middle" font-weight="750" fill="#5937B4">Continuous Improvement</text>
+<text x="801" y="553" font-size="18" text-anchor="middle" fill="#6B5E9D">Proposed by review-skill · applied only with your approval</text>
+<g font-size="21" font-weight="700" fill="#23304B" text-anchor="middle">
+<text x="476" y="599">Update preferences</text>
+<text x="799" y="599">Improve existing skills</text>
+<text x="1115" y="599">Create project-local skills</text>
+</g>
+<g font-size="31" fill="#B3A7DD" text-anchor="middle"><text x="642" y="603">+</text><text x="963" y="603">+</text></g>
+<rect x="42" y="692" width="1516" height="91" rx="40" fill="#EDF0FE"/>
+<g fill="#182444" font-size="20" font-weight="730"><text x="127" y="730">Adapt to your style</text><text x="624" y="730">Reduce repeated interactions</text><text x="1168" y="730">Build a reusable workflow</text></g>
+<g fill="#596886" font-size="17"><text x="127" y="757">Explain things your way</text><text x="624" y="757">Turn corrections into lasting improvements</text><text x="1168" y="757">Grow project-specific capabilities</text></g>
+<g font-size="29" fill="#785BE8"><text x="81" y="742">◎</text><text x="579" y="742">↗</text><text x="1123" y="742">◇</text></g>
+</g></svg>
