@@ -42,6 +42,20 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
         return 2
     root = target / skill_dir[tool]
     cfg_root = target / ".agent-workflow"
+    # Avoid silently creating a second unmanaged Skill copy when a project
+    # already has tracked Skills at a different platform location.
+    state_path = cfg_root / STATE
+    if state_path.is_file() and not state_path.is_symlink():
+        try:
+            prior_tool = json.loads(state_path.read_text(encoding="utf-8")).get("tool")
+        except (ValueError, OSError, AttributeError):
+            print("ERROR: cannot read existing installation state", file=sys.stderr)
+            return 2
+        if prior_tool in skill_dir and skill_dir[prior_tool] != skill_dir[tool]:
+            print(f"ERROR: existing installation uses {prior_tool} Skill directory; "
+                  "refusing a second unmanaged copy. Use a fresh project for --tool all "
+                  "or migrate the existing installation explicitly.", file=sys.stderr)
+            return 2
     jobs = []
     for name in SKILLS:
         src = ROOT / "skills" / name
