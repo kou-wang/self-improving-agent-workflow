@@ -1,143 +1,117 @@
+<div align="center">
+
 # Self-Improving Agent Workflow
 
-**Make your coding agent adapt to you—not the other way around.**
+### Five skills. One feedback loop. An agent that adapts to you.
 
-A lightweight, human-approved set of **five independent Skills** for [Cursor](https://cursor.com/), [Claude Code](https://claude.com/product/claude-code), and [GitHub Copilot](https://github.com/features/copilot). Clarify requirements, investigate bugs, plan and execute changes, then use real feedback to **propose better instructions for next time**.
+**Stop repeating how you want your coding agent to work.**
 
-**[Quickstart](docs/quickstart.md) · [Copilot setup](docs/copilot.md) · [How personalization works](docs/initialization.md) · [CLI & upgrades](docs/cli.md) · [Latest release](https://github.com/kou-wang/self-improving-agent-workflow/releases/latest)**
+[![Latest release](https://img.shields.io/github/v/release/kou-wang/self-improving-agent-workflow?style=for-the-badge)](https://github.com/kou-wang/self-improving-agent-workflow/releases/latest) [![CI](https://img.shields.io/github/actions/workflow/status/kou-wang/self-improving-agent-workflow/installer-smoke.yml?branch=main&style=for-the-badge&label=tests)](https://github.com/kou-wang/self-improving-agent-workflow/actions) [![MIT](https://img.shields.io/github/license/kou-wang/self-improving-agent-workflow?style=for-the-badge)](LICENSE)
 
-> **Early access.** Stable v0.2.1 supports Cursor and Claude Code; **Copilot support is being prepared for v0.3.0** and is not available via the latest stable release until v0.3.0 is published. Automated tests cover installation and updates, but full live behavior across all clients is not yet verified.
+**Cursor** · **Claude Code** · **GitHub Copilot**
 
-## Why use it?
+[Get started](#-quick-start) · [Explore the 5 skills](#-the-five-core-skills) · [How it works](#-how-it-works) · [Detailed guide](docs/overview.md)
 
-Coding agents can solve tasks yet still require repeated explanations of *what matters*, *how to explain it*, and *which workflows to follow*. This project starts with usable, editable response defaults—**conclusion first, user-visible behavior and impact before code details, concise but complete**—and provides a review process for turning **specific corrections** into reusable improvements.
+</div>
 
-- **Start anywhere.** Use one Skill without running the others first.
-- **Keep control.** Review suggests changes; modifying Skills or preferences requires your approval and a separate authorized action.
-- **Keep your setup.** Installation does not overwrite existing files. Upgrades protect locally edited Skills and support backups/rollback.
-- **Project-scoped defaults.** Cursor and Claude Code receive an always-on project rule pointing to local preferences and project rules, even outside Skill calls.
+---
 
-This is a **human-in-the-loop instruction workflow**, not an autonomous agent, background learner, or model-training system. It does not learn across unrelated projects unless you explicitly carry changes over.
+## ✨ The idea
 
-## Install in your project
+**An agent can finish a task and still make you repeat yourself next time.** This project installs five reusable, independent coding-agent skills alongside editable project preferences. After a real interaction, `review-skill` can **propose** improvements to the instructions that shape future responses.
 
-**Prerequisites:** Python 3.10+, Git, [pipx](https://pipx.pypa.io/), and an existing project directory. This CLI is installed from GitHub, **not PyPI**.
+> **Self-improving ≠ self-modifying.** Changes are evidence-based, proposed for human review, and applied only after separate authorization. No background training or automatic cross-project memory.
 
-Install the CLI once:
+## 🧭 How it works
+
+```mermaid
+flowchart TB
+    Request["Your task or feedback"]
+    subgraph Skills["Five independent core skills"]
+        direction LR
+        Learn["01 · learn-requirement"]
+        Investigate["02 · investigate"]
+        Plan["03 · make-plan"]
+        Execute["04 · execute"]
+        Review["05 · review-skill"]
+    end
+    Request -. "invoke any skill directly" .-> Learn
+    Request -.-> Investigate
+    Request -.-> Plan
+    Request -.-> Execute
+    Request -.-> Review
+    Learn -. "optional handoff" .-> Plan
+    Investigate -. "optional handoff" .-> Plan
+    Plan -. "after approval" .-> Execute
+    Execute -. "feedback" .-> Review
+    Review --> Proposal{"Human approves?"}
+    Proposal -- "yes: separate authorized edit" --> Adapt["Preferences · Rules · Existing or new Skill"]
+    Proposal -- "no" --> Keep["Keep current behavior"]
+    Adapt -. "guide future work" .-> Request
+    classDef skill fill:#eaf3ff,stroke:#3478c0,color:#14365b
+    classDef decision fill:#fff4db,stroke:#b47b1a,color:#4f370e
+    class Learn,Investigate,Plan,Execute,Review skill
+    class Proposal decision
+```
+
+<p align="center"><sub>Optional paths, not a mandatory pipeline. A clear request can go straight to <code>make-plan</code> or <code>execute</code>.</sub></p>
+
+## 🧩 The five core skills
+
+| Skill | When to use it | Output |
+| :--- | :--- | :--- |
+| **[01 · Learn Requirement](skills/learn-requirement/SKILL.md)** | Understand a feature request or screenshot | Expected user-visible behavior, without implementation |
+| **[02 · Investigate](skills/investigate/SKILL.md)** | Trace a bug or unexpected state | Evidence, cause when known, impact, and unknowns — **read-only** |
+| **[03 · Make Plan](skills/make-plan/SKILL.md)** | Choose an implementation approach | Recommended plan, trade-offs, verification — **no edits** |
+| **[04 · Execute](skills/execute/SKILL.md)** | Carry out a clear, authorized task | Actual changes and validation, within approved boundaries |
+| **[05 · Review Skill](skills/review-skill/SKILL.md)** | Stop repeating a correction or preference | Proposed reusable improvement — **no automatic edits** |
+
+## ⚡ Quick start
+
+Install the CLI once (**Python 3.10+**, Git and [pipx](https://pipx.pypa.io/) required):
 
 ```bash
 pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git
 ```
 
-Then open a terminal **inside your own project**:
+Run inside an **existing project directory**:
 
 ```bash
+# Pick one: cursor | claude | copilot | both | all
 agent-workflow install --tool cursor --language en
 ```
 
-Use `--tool claude` for Claude Code or `--tool both` for Cursor + Claude Code. **From v0.3.0 onward**, `--tool copilot` supports GitHub Copilot, and `--tool all` installs shared Skills and separate rules for all three agents. Languages: `en`, `zh-CN`, `zh-TW`. To preview first, add `--check` to the installation command.
+| Agent | Install option |
+| :--- | :--- |
+| Cursor | `--tool cursor` |
+| Claude Code | `--tool claude` |
+| GitHub Copilot | `--tool copilot` |
+| Cursor + Claude Code | `--tool both` |
+| All three | `--tool all` |
 
-Open or restart the project in your coding agent. Your installation now contains five Skills, editable settings under `.agent-workflow/`, and the relevant project rule. See the [step-by-step guide](docs/quickstart.md) if Skills do not appear.
+Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add `--check` to preview installation. The installer preserves existing files.
 
-## The five Skills
-
-| Skill | Use it when… | What it does |
-| --- | --- | --- |
-| [`/learn-requirement`](skills/learn-requirement/SKILL.md) | A request or screenshot is ambiguous | Describes the intended user-visible result without jumping to implementation |
-| [`/investigate`](skills/investigate/SKILL.md) | A bug, error, or unexpected state needs explanation | Traces available evidence and separates confirmed causes from unknowns; read-only |
-| [`/make-plan`](skills/make-plan/SKILL.md) | You need an implementation approach | Proposes scope, trade-offs, verification, and a recommended plan; does not change files |
-| [`/execute`](skills/execute/SKILL.md) | You have a clear action to take | Carries out an authorized request or approved plan within project safety rules |
-| [`/review-skill`](skills/review-skill/SKILL.md) | The agent repeatedly misses your preferred behavior | Reviews actual interactions and proposes targeted Skill, rule, or preference improvements; does not apply them |
-
-**No mandatory pipeline:** call `/make-plan` directly for a known feature or `/execute` directly for a sufficiently specific, authorized change. The progression below is only an example.
-
-## Example: from feedback to a better workflow
-
-**1. Investigate a report**
+## 🔁 Turn feedback into reusable improvements
 
 ```text
-/investigate
-The app shows "Saved", but the change disappears after refresh.
-What happened, what is affected, and what is still unknown?
+You:    /investigate — “Saved” appears, but changes disappear on refresh.
+Agent:  Explains observed behavior, evidence, and what remains unknown.
+
+You:    /review-skill — I had to ask twice for the business impact.
+Agent:  Proposes an edit to user-preferences.md (or a relevant Skill).
+
+You:    Approve the proposed change and authorize applying it.
+Result: Your project instructions can guide future responses.
 ```
 
-The Skill should distinguish the visible success message from evidence of persistence, rather than assume a database cause.
+**Key features:** independent skills · editable response defaults · project-scoped instructions · safe non-overwriting installs · managed Skill updates · backups and guarded rollback.
 
-**2. Decide what to change**
+## 📚 Go deeper
 
-```text
-/make-plan
-Recommend a fix with verification steps. Do not implement yet.
-```
+**[Complete overview →](docs/overview.md)** — design philosophy, project layout, review loop, configuration, upgrade safety, and limitations.
 
-**3. Apply only when authorized**
+[Quickstart](docs/quickstart.md) · [Cursor](docs/cursor.md) · [Claude Code](docs/claude-code.md) · [Copilot](docs/copilot.md) · [CLI / upgrades](docs/cli.md) · [Roadmap](TODO.md)
 
-```text
-/execute
-Implement the approved plan and report what was verified.
-```
+---
 
-**4. Improve future responses**
-
-```text
-/review-skill
-I had to ask twice for the user-visible impact.
-Propose a reusable change so future explanations lead with that impact.
-```
-
-Review **proposes** an edit to a Skill, a project rule, or `.agent-workflow/user-preferences.md`. You decide whether to apply it. You can invoke `/review-skill` after ordinary chats too; no preceding Skill is required.
-
-## What gets installed?
-
-```text
-your-project/
-├── .cursor/skills/          # or .claude/skills/ (--tool both/all), or .github/skills/ (copilot)
-│   ├── learn-requirement/
-│   ├── investigate/
-│   ├── make-plan/
-│   ├── execute/
-│   └── review-skill/
-├── .cursor/rules/agent-workflow.mdc  # Cursor, when selected
-│   # OR .claude/rules/agent-workflow.md for Claude Code
-│   # GitHub Copilot: .github/copilot-instructions.md
-└── .agent-workflow/
-    ├── project-rules.md       # your project constraints and permissions
-    ├── user-preferences.md    # editable starter response style
-    ├── language.md            # selected response language
-    └── install-state.json     # version and managed Skill hashes
-```
-
-The initial style is generalized from a real development workflow; it includes **no proprietary RMA system details**. Customize the files for your project. Existing preferences and rules are not silently replaced by new defaults.
-
-## Updates and rollback
-
-```bash
-# Update the CLI implementation (separate from updating Skills)
-pipx upgrade self-improving-agent-workflow
-
-# Check, then update installed core Skills from the latest stable GitHub Release
-agent-workflow update --check
-agent-workflow update
-
-# Preview rollback using the backup ID printed by an update
-agent-workflow rollback BACKUP_ID
-agent-workflow rollback BACKUP_ID --apply
-```
-
-To add missing project rule files to an older installation, rerun `agent-workflow install --tool cursor --language en`; it skips existing files. Changes to the CLI itself require the separate `pipx upgrade` command. See [upgrade details](docs/upgrading.md) and [CLI limitations](docs/cli.md).
-
-## Scope, safety, and limitations
-
-- `/learn-requirement`, `/investigate`, and `/make-plan` do not implement changes. `/review-skill` only proposes improvements.
-- `/execute` does not grant database, deployment, production, or repository permissions; project rules and explicit authorization still govern those operations.
-- Instructions do **not** guarantee model compliance. Always verify consequential code/data changes yourself.
-- The updater preserves local edits by default, but is **not fully transactional** across files. It relies on GitHub-hosted releases, without signed-release attestations.
-- Please keep credentials, internal code, and private conversation content out of public issues.
-
-## Documentation and community
-
-[Cursor guide](docs/cursor.md) · [Claude Code guide](docs/claude-code.md) · [Copilot guide](docs/copilot.md) · [Architecture](docs/architecture.md) · [Review design](docs/review-design.md) · [Roadmap](TODO.md) · [Changelog](CHANGELOG.md)
-
-Feedback and reproducible bug reports are welcome via [GitHub Issues](https://github.com/kou-wang/self-improving-agent-workflow/issues). Include the CLI version, coding agent, command, expected behavior, and observed result—**without secrets or proprietary data**.
-
-**License:** [MIT](LICENSE).
+<sub>**Early access · v0.3.0** — Python CI is passing; real-client behavior is not exhaustively validated. Instructions do not guarantee agent compliance. Do not place secrets or private project information in public issues. [MIT License](LICENSE) · [Report an issue](https://github.com/kou-wang/self-improving-agent-workflow/issues)</sub>
