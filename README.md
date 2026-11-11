@@ -18,7 +18,7 @@
 
 ## ✨ The idea
 
-**An agent can finish a task and still make you repeat yourself next time.** This project installs five reusable, independent coding-agent skills alongside editable project preferences. After a real interaction, `review-skill` can **propose** improvements to the instructions that shape future responses.
+**Less prompting. Better communication. More reusable skills.** Paste a bug screenshot, trace log, or a short request; then call the relevant Skill directly. Work through the task in normal conversation. Later, `review-skill` can **propose** saving preferences—like simpler explanations or preserving English technical terms—and improving existing Skills or creating project-local ones, so you do not have to repeat those corrections.
 
 > **Self-improving ≠ self-modifying.** Changes are evidence-based, proposed for human review, and applied only after separate authorization. No background training or automatic cross-project memory.
 
@@ -71,11 +71,11 @@ Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add
 
 <div align="center">
 
-![Three-step developer feedback story: investigate, review and approve a reusable improvement](docs/assets/feedback-workflow.svg)
+![Context-first agent workflow: paste a screenshot or log, investigate, refine explanations in conversation, and use review-skill to propose reusable preferences or Skills that can be applied through execute after approval](docs/assets/feedback-workflow.svg)
 
 </div>
 
-<p align="center"><sub>Review suggests improvements; applying them always requires separate developer authorization.</sub></p>
+<p align="center"><sub>No scripted dialogue between Skills: share context and invoke only what you need. Review proposes improvements; after approval, apply with <code>/execute</code> (optionally <code>/make-plan</code> first).</sub></p>
 
 **Key features:** independent skills · editable response defaults · project-scoped instructions · safe non-overwriting installs · managed Skill updates · backups and guarded rollback.
 
