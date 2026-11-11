@@ -67,11 +67,13 @@ agent-workflow install --tool cursor --language en
 
 Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add `--check` to preview installation. The installer preserves existing files.
 
-## 🔁 Turn feedback into reusable improvements
+## 🔁 Turn one conversation into lasting improvements
+
+**Paste context → call a Skill → talk naturally → review later.** You don't need to explain the task again each time you switch modes, or send a scripted prompt after every Skill.
 
 <div align="center">
 
-![Context-first agent workflow: paste a screenshot or log, investigate, refine explanations in conversation, and use review-skill to propose reusable preferences or Skills that can be applied through execute after approval](docs/assets/feedback-workflow.svg)
+![Three-card conversation example: share a screenshot then investigate, request simpler explanations in English terminology, review preferences, and approve an update through execute](docs/assets/feedback-workflow.svg)
 
 </div>
 
