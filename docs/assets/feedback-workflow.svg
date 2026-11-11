@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+<title id="title">From Feedback to a Better Workflow</title>
+<desc id="desc">Three optional steps: investigate a save issue, use review-skill to propose an improvement based on repeated feedback, and approve and separately authorize the change. Project instructions can then guide future interactions.</desc>
+<defs>
+<linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F8F7FF"/></linearGradient>
+<linearGradient id="outcome" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#EDEDFD"/><stop offset="1" stop-color="#F5EAFF"/></linearGradient>
+</defs>
+<rect width="1600" height="800" rx="36" fill="url(#background)"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="800" y="69" font-size="51" font-weight="800" text-anchor="middle" fill="#11182D">From Feedback to a Better Workflow</text>
+<text x="800" y="113" font-size="23" text-anchor="middle" fill="#60708F">A real example: investigate, review, and improve with your approval.</text>
+<g>
+<rect x="34" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#B9DAFF" stroke-width="2"/>
+<path d="M64 164 H494 Q524 164 524 194 V286 H34 V194 Q34 164 64 164" fill="#EBF5FF"/>
+<circle cx="94" cy="220" r="30" fill="#3B82F6"/>
+<text x="94" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">1</text>
+<text x="146" y="226" font-size="35" font-weight="800" fill="#10172C">Investigate</text>
+<text x="66" y="268" font-size="20" fill="#43516C">Understand the issue with evidence</text>
+<text x="70" y="340" font-size="21" font-weight="700" fill="#3B82F6">YOU</text><rect x="70" y="355" width="418" height="109" rx="20" fill="#EBF5FF" stroke="#B9DAFF" stroke-width="1.2"/><text x="89" y="390" font-size="20" font-weight="700" fill="#192442">/investigate</text>
+<text x="89" y="416" font-size="19" font-weight="500" fill="#192442">“Saved” appears, but changes</text>
+<text x="89" y="442" font-size="19" font-weight="500" fill="#192442">disappear after refresh.</text>
+<text x="70" y="488" font-size="21" font-weight="700" fill="#4435A4">AGENT</text><rect x="70" y="503" width="418" height="109" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="89" y="538" font-size="19" font-weight="500" fill="#192442">Explains observed behavior,</text>
+<text x="89" y="564" font-size="19" font-weight="500" fill="#192442">evidence, and what remains</text>
+<text x="89" y="590" font-size="19" font-weight="500" fill="#192442">unknown.</text>
+</g>
+<g>
+<rect x="560" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#FFE1A0" stroke-width="2"/>
+<path d="M590 164 H1020 Q1050 164 1050 194 V286 H560 V194 Q560 164 590 164" fill="#FFF6DE"/>
+<circle cx="620" cy="220" r="30" fill="#E5A126"/>
+<text x="620" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">2</text>
+<text x="672" y="226" font-size="35" font-weight="800" fill="#10172C">Review</text>
+<text x="592" y="268" font-size="20" fill="#43516C">Turn feedback into a reusable fix</text>
+<text x="596" y="340" font-size="21" font-weight="700" fill="#E5A126">YOU</text><rect x="596" y="355" width="418" height="109" rx="20" fill="#FFF6DE" stroke="#FFE1A0" stroke-width="1.2"/><text x="615" y="390" font-size="20" font-weight="700" fill="#192442">/review-skill</text>
+<text x="615" y="416" font-size="19" font-weight="500" fill="#192442">I had to ask twice for the</text>
+<text x="615" y="442" font-size="19" font-weight="500" fill="#192442">business impact.</text>
+<text x="596" y="488" font-size="21" font-weight="700" fill="#4435A4">AGENT</text><rect x="596" y="503" width="418" height="109" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="615" y="538" font-size="19" font-weight="500" fill="#192442">Proposes a reusable update to</text>
+<text x="615" y="564" font-size="19" font-weight="500" fill="#192442">user-preferences.md or a</text>
+<text x="615" y="590" font-size="19" font-weight="500" fill="#192442">relevant Skill.</text>
+</g>
+<g>
+<rect x="1086" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#DBC3FF" stroke-width="2"/>
+<path d="M1116 164 H1546 Q1576 164 1576 194 V286 H1086 V194 Q1086 164 1116 164" fill="#F4EDFF"/>
+<circle cx="1146" cy="220" r="30" fill="#955BDF"/>
+<text x="1146" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">3</text>
+<text x="1198" y="226" font-size="35" font-weight="800" fill="#10172C">Approve</text>
+<text x="1118" y="268" font-size="20" fill="#43516C">Decide what should change</text>
+<text x="1122" y="340" font-size="21" font-weight="700" fill="#955BDF">YOU</text><rect x="1122" y="355" width="418" height="83" rx="20" fill="#F4EDFF" stroke="#DBC3FF" stroke-width="1.2"/><text x="1141" y="390" font-size="19" font-weight="500" fill="#192442">Approve the proposal and</text>
+<text x="1141" y="416" font-size="19" font-weight="500" fill="#192442">separately authorize the edit.</text>
+<text x="1122" y="488" font-size="21" font-weight="700" fill="#4435A4">RESULT</text><rect x="1122" y="503" width="418" height="83" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="1141" y="538" font-size="19" font-weight="500" fill="#192442">Approved project instructions</text>
+<text x="1141" y="564" font-size="19" font-weight="500" fill="#192442">can guide future responses.</text>
+</g>
+<path d="M525 417 h31 l-11 -12 m11 12 l-11 12" fill="none" stroke="#8D64D6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1052 417 h30 l-11 -12 m11 12 l-11 12" fill="none" stroke="#8D64D6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="37" y="688" width="1526" height="82" rx="41" fill="url(#outcome)"/>
+<text x="93" y="740" font-weight="800" font-size="30" fill="#693CB5">◎</text>
+<text x="153" y="739" font-size="27" font-weight="800" fill="#1A2140">The outcome</text>
+<path d="M420 707 v44" stroke="#C4B6E8" stroke-width="2"/>
+<text x="459" y="739" font-size="25" font-weight="650" fill="#52329B">Fewer repeated corrections. Better project-specific guidance.</text>
+</g>
+</svg>
