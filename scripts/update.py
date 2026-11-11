@@ -48,7 +48,7 @@ def load_state(config: Path) -> dict | None:
     if not path.exists():
         return None
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema") != 1 or data.get("tool") not in ("cursor", "claude", "both"):
+    if data.get("schema") != 1 or data.get("tool") not in ("cursor", "claude", "both", "copilot", "all"):
         raise ValueError("Unsupported installation-state format")
     if not isinstance(data.get("managed"), dict):
         raise ValueError("Invalid managed Skills map")
@@ -56,7 +56,8 @@ def load_state(config: Path) -> dict | None:
 
 
 def location(target: Path, tool: str) -> Path:
-    return target / (".cursor/skills" if tool == "cursor" else ".claude/skills")
+    return target / (".cursor/skills" if tool == "cursor" else
+                     ".github/skills" if tool == "copilot" else ".claude/skills")
 
 
 def plan(target: Path, state: dict | None, prefer: set[str]) -> list[dict]:
@@ -94,8 +95,11 @@ def plan(target: Path, state: dict | None, prefer: set[str]) -> list[dict]:
 def infer_tool(target: Path) -> str:
     cursor = (target / ".cursor/skills").exists()
     claude = (target / ".claude/skills").exists()
-    if cursor and claude:
+    copilot = (target / ".github/skills").exists()
+    if sum((cursor, claude, copilot)) > 1:
         raise ValueError("Both Skill locations exist; installation history is missing. Resolve paths manually.")
+    if copilot:
+        return "copilot"
     if cursor:
         return "cursor"
     if claude:
