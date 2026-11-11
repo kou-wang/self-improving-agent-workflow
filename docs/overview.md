@@ -30,6 +30,10 @@ Do not force the user through all five stages for a simple question or a clear s
 
 ## 3. Review is the improvement loop
 
+A typical interaction is **not a series of long, scripted prompts**. The user may paste a bug screenshot or trace log, discuss it briefly, and invoke `/investigate` without restating the context. If the explanation is too technical, they can simply ask, “Explain it more simply and keep the English technical terms.” The conversation continues naturally. After the task, `/review-skill` can inspect that correction and propose saving a response preference so the developer does not need to repeat it. It may also propose improving an existing Skill or creating a justified new project-local Skill.
+
+**Applying approved changes:** once the developer accepts a proposal, use a separate authorized `/execute` to edit the relevant file; use `/make-plan` first only when the change benefits from planning. Review itself never writes preferences or Skills.
+
 The most important distinction is **proposed** versus **applied** improvement:
 
 1. **Observe:** Collect actual examples of avoidable rework, repeated clarification, wording corrections, incorrect handoffs or process gaps.
