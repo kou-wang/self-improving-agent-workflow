@@ -78,6 +78,12 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(installer.install("copilot", self.project, False), 0)
         self.assertFalse((self.project / ".github").exists())
 
+    def test_conflicting_platform_install_is_not_silently_unmanaged(self):
+        self.assertEqual(installer.install("cursor", self.project, True), 0)
+        self.assertEqual(installer.install("copilot", self.project, True), 2)
+        self.assertFalse((self.project / ".github/skills").exists())
+        self.assertEqual(installer.install("all", self.project, True), 2)
+
     def test_existing_rule_is_preserved(self):
         rule = self.project / ".cursor/rules/agent-workflow.mdc"
         rule.parent.mkdir(parents=True)
