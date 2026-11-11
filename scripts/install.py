@@ -32,8 +32,15 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
         print(f"ERROR: project directory does not exist: {target}", file=sys.stderr)
         return 2
 
-    # Cursor can also discover .claude/skills, so 'both' installs only once.
-    root = target / (".cursor/skills" if tool == "cursor" else ".claude/skills")
+    # Cursor and Copilot both recognize .claude/skills. Share one copy for
+    # 'both' (Cursor + Claude) and 'all' (Cursor + Claude + Copilot).
+    skill_dir = {"cursor": ".cursor/skills", "claude": ".claude/skills",
+                 "both": ".claude/skills", "copilot": ".github/skills",
+                 "all": ".claude/skills"}
+    if tool not in skill_dir:
+        print(f"ERROR: unsupported tool: {tool}", file=sys.stderr)
+        return 2
+    root = target / skill_dir[tool]
     cfg_root = target / ".agent-workflow"
     jobs = []
     for name in SKILLS:
@@ -53,16 +60,22 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
     # Always-on project rules make preferences effective even without a Skill.
     # Do not touch existing rules: project owners may have customized them.
     rule_jobs = []
-    if tool in ("cursor", "both"):
+    if tool in ("cursor", "both", "all"):
         rule_jobs.append(("cursor-rule.mdc", ".cursor/rules/agent-workflow.mdc"))
-    if tool in ("claude", "both"):
+    if tool in ("claude", "both", "all"):
         rule_jobs.append(("claude-rule.md", ".claude/rules/agent-workflow.md"))
+    if tool in ("copilot", "all"):
+        rule_jobs.append(("copilot-instructions.md", ".github/copilot-instructions.md"))
     # v0.1.0 release archives predate always-on rules. They remain installable
     # with an upgraded CLI; mixed/incomplete template sets fail closed.
     rule_available = [(ROOT / "templates" / name).is_file()
                       for name in ("cursor-rule.mdc", "claude-rule.md")]
     if any(rule_available) and not all(rule_available):
         print("ERROR: incomplete response rule templates", file=sys.stderr)
+        return 2
+    if tool in ("copilot", "all") and not (ROOT / "templates/copilot-instructions.md").is_file():
+        print("ERROR: this source release does not support GitHub Copilot (requires v0.3.0+)",
+              file=sys.stderr)
         return 2
     if all(rule_available):
         for template_name, relative_dest in rule_jobs:
@@ -131,8 +144,8 @@ def install(tool: str, target: Path, apply: bool, language: str = "en") -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tool", choices=("cursor", "claude", "both"), required=True,
-                        help="For both, install once to .claude/skills (also discoverable by Cursor)")
+    parser.add_argument("--tool", choices=("cursor", "claude", "both", "copilot", "all"), required=True,
+                        help="For both/all, share one .claude/skills copy across compatible agents")
     parser.add_argument("--target", required=True, type=Path, help="Existing project directory")
     parser.add_argument("--apply", action="store_true", help="Write new files (otherwise dry-run only)")
     parser.add_argument("--language", choices=LANGUAGES, default="en", help="Response language on first install (default: en)")
