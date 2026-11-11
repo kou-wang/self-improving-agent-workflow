@@ -51,6 +51,39 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue((self.project / ".cursor/rules/agent-workflow.mdc").is_file())
         self.assertFalse((self.project / ".cursor/skills").exists())
 
+    def test_copilot_install_and_idempotence(self):
+        self.assertEqual(installer.install("copilot", self.project, True, "zh-CN"), 0)
+        skills = self.project / ".github/skills"
+        for name in installer.SKILLS:
+            self.assertTrue((skills / name / "SKILL.md").is_file())
+        rule = self.project / ".github/copilot-instructions.md"
+        self.assertIn(".agent-workflow/user-preferences.md", rule.read_text())
+        state = (self.project / ".agent-workflow/install-state.json").read_text()
+        self.assertIn('"tool": "copilot"', state)
+        rule.write_text("custom copilot rules\\n")
+        self.assertEqual(installer.install("copilot", self.project, True, "en"), 0)
+        self.assertEqual(rule.read_text(), "custom copilot rules\\n")
+
+    def test_all_uses_shared_skills_and_three_rules(self):
+        self.assertEqual(installer.install("all", self.project, True), 0)
+        self.assertTrue((self.project / ".claude/skills/execute/SKILL.md").is_file())
+        self.assertFalse((self.project / ".github/skills").exists())
+        self.assertFalse((self.project / ".cursor/skills").exists())
+        for path in (".cursor/rules/agent-workflow.mdc",
+                     ".claude/rules/agent-workflow.md",
+                     ".github/copilot-instructions.md"):
+            self.assertTrue((self.project / path).is_file())
+
+    def test_copilot_check_does_not_write(self):
+        self.assertEqual(installer.install("copilot", self.project, False), 0)
+        self.assertFalse((self.project / ".github").exists())
+
+    def test_conflicting_platform_install_is_not_silently_unmanaged(self):
+        self.assertEqual(installer.install("cursor", self.project, True), 0)
+        self.assertEqual(installer.install("copilot", self.project, True), 2)
+        self.assertFalse((self.project / ".github/skills").exists())
+        self.assertEqual(installer.install("all", self.project, True), 2)
+
     def test_existing_rule_is_preserved(self):
         rule = self.project / ".cursor/rules/agent-workflow.mdc"
         rule.parent.mkdir(parents=True)

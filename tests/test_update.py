@@ -39,6 +39,22 @@ class UpgradeTests(unittest.TestCase):
         self.prefs = self.target / ".agent-workflow/user-preferences.md"
         self.language = self.target / ".agent-workflow/language.md"
 
+    def test_copilot_update_and_rollback_preserves_preferences(self):
+        with tempfile.TemporaryDirectory() as temp:
+            target = Path(temp)
+            self.assertEqual(installer.install("copilot", target, True, "zh-TW"), 0)
+            local = target / ".github/skills/execute/SKILL.md"
+            old = local.read_bytes()
+            self.source_skill.write_bytes(old + b"\\n# Copilot update\\n")
+            self.assertEqual(updater.update(target, apply=False), 0)
+            self.assertEqual(local.read_bytes(), old)
+            self.assertEqual(updater.update(target, apply=True), 0)
+            self.assertIn(b"Copilot update", local.read_bytes())
+            backup = next((target / ".agent-workflow/backups").iterdir())
+            self.assertEqual(updater.rollback(target, backup.name, True), 0)
+            self.assertEqual(local.read_bytes(), old)
+            self.assertIn("zh-TW", (target / ".agent-workflow/language.md").read_text())
+
     def test_check_is_read_only_and_updates_with_backup(self):
         old = self.skill.read_bytes()
         self.source_skill.write_bytes(old + b"\n# Upstream update\n")

@@ -24,6 +24,8 @@ def archive(version="1.2.3", missing=None, bad_version=False):
             "---\nalwaysApply: true\n---\n# Initial response rule\n"
         ).encode()
         data["templates/claude-rule.md"] = b"# Initial response rule\n"
+    if tuple(int(n) for n in version.split(".")) >= (0, 3, 0):
+        data["templates/copilot-instructions.md"] = b"# Copilot instructions\n"
     if missing:
         del data[missing]
     buffer = io.BytesIO()
@@ -69,6 +71,33 @@ class CLITests(unittest.TestCase):
         self.assertEqual(state["version"], "1.2.3")
         self.assertIn("zh-TW", (self.project / ".agent-workflow/language.md").read_text())
         self.assertTrue((self.project / ".cursor/rules/agent-workflow.mdc").is_file())
+
+    def test_copilot_install_and_update(self):
+        with self.mock_release():
+            self.assertEqual(cli.main(["install", "--tool", "copilot", "--target",
+                                       str(self.project)]), 0)
+            self.assertEqual(cli.main(["update", "--target", str(self.project),
+                                       "--check"]), 0)
+        self.assertTrue((self.project / ".github/skills/execute/SKILL.md").is_file())
+        self.assertTrue((self.project / ".github/copilot-instructions.md").is_file())
+
+    def test_pre_copilot_release_rejected_for_copilot_only(self):
+        with self.mock_release(payload=archive(version="0.2.1"), tag="v0.2.1"):
+            self.assertEqual(cli.main(["install", "--tool", "copilot", "--target",
+                                       str(self.project)]), 2)
+        self.assertFalse((self.project / ".github").exists())
+
+    def test_pre_copilot_release_still_installs_cursor(self):
+        with self.mock_release(payload=archive(version="0.2.1"), tag="v0.2.1"):
+            self.assertEqual(cli.main(["install", "--tool", "cursor", "--target",
+                                       str(self.project)]), 0)
+        self.assertTrue((self.project / ".cursor/skills/execute/SKILL.md").is_file())
+
+    def test_missing_copilot_rule_rejected(self):
+        with self.mock_release(payload=archive(missing="templates/copilot-instructions.md")):
+            self.assertEqual(cli.main(["install", "--tool", "copilot", "--target",
+                                       str(self.project)]), 2)
+        self.assertFalse((self.project / ".github").exists())
 
     def test_install_preview_is_read_only(self):
         with self.mock_release():

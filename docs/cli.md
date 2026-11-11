@@ -20,7 +20,7 @@ In the target project directory, or supply `--target /path/to/project`:
 agent-workflow install --tool cursor --language zh-CN
 ```
 
-For Claude Code use `--tool claude`, for both `--tool both`. Available response languages are `en`, `zh-CN`, `zh-TW`. Run with `--check` to preview before installing.
+For Claude Code use `--tool claude`; `--tool both` means Cursor + Claude Code. Starting in v0.3.0, use `--tool copilot` for GitHub Copilot or `--tool all` for all three agents. See [Copilot setup](copilot.md). Available response languages are `en`, `zh-CN`, `zh-TW`. Run with `--check` to preview before installing.
 
 ## Update official Skills with one command
 
@@ -56,7 +56,7 @@ Rollback refuses to overwrite edits made after the upgrade.
 
 ## Release policy and limitations
 
-- **Stable Release `v0.2.0` is published.** The CLI installs/updates from the latest published stable tag, not an unreleased branch. RMA-derived defaults and always-on project rules are included from v0.2.0 onward. v0.2.1 is a documentation/license maintenance release.
+- **Stable v0.2.1 is published; Copilot integration is planned for v0.3.0.** The CLI installs/updates from the latest published stable tag, not an unreleased branch. RMA-derived defaults and always-on project rules are included from v0.2.0 onward. v0.2.1 is a documentation/license maintenance release.
 - GitHub Releases must be named `vMAJOR.MINOR.PATCH`, and their source archive must contain a matching `VERSION` file.
 - Release archives are downloaded over HTTPS and validated against a restricted list of filenames, sizes and sources before the installer reads them. This is **not a signed-release or supply-chain-attestation system**; trust in the repository and GitHub remains necessary.
 - Only **Skill source updates** are automatic. A new CLI implementation may require updating the pipx package separately.

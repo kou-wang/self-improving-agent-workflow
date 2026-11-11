@@ -2,11 +2,11 @@
 
 **Make your coding agent adapt to you—not the other way around.**
 
-A lightweight, human-approved set of **five independent Skills** for [Cursor](https://cursor.com/) and [Claude Code](https://claude.com/product/claude-code). Clarify requirements, investigate bugs, plan and execute changes, then use real feedback to **propose better instructions for next time**.
+A lightweight, human-approved set of **five independent Skills** for [Cursor](https://cursor.com/), [Claude Code](https://claude.com/product/claude-code), and [GitHub Copilot](https://github.com/features/copilot). Clarify requirements, investigate bugs, plan and execute changes, then use real feedback to **propose better instructions for next time**.
 
-**[Quickstart](docs/quickstart.md) · [How personalization works](docs/initialization.md) · [CLI & upgrades](docs/cli.md) · [Latest release](https://github.com/kou-wang/self-improving-agent-workflow/releases/latest)**
+**[Quickstart](docs/quickstart.md) · [Copilot setup](docs/copilot.md) · [How personalization works](docs/initialization.md) · [CLI & upgrades](docs/cli.md) · [Latest release](https://github.com/kou-wang/self-improving-agent-workflow/releases/latest)**
 
-> **Early access (v0.2.1).** The Python installer and CLI have automated tests, and a CLI upgrade plus fresh Cursor project installation have been exercised. Full behavior across Cursor/Claude Code versions and complete end-to-end rollback scenarios are **not yet verified**.
+> **Early access.** Stable v0.2.1 supports Cursor and Claude Code; **Copilot support is being prepared for v0.3.0** and is not available via the latest stable release until v0.3.0 is published. Automated tests cover installation and updates, but full live behavior across all clients is not yet verified.
 
 ## Why use it?
 
@@ -35,7 +35,7 @@ Then open a terminal **inside your own project**:
 agent-workflow install --tool cursor --language en
 ```
 
-Use `--tool claude` for Claude Code or `--tool both` for both. Languages: `en`, `zh-CN`, `zh-TW`. To preview first, add `--check` to the installation command.
+Use `--tool claude` for Claude Code or `--tool both` for Cursor + Claude Code. **From v0.3.0 onward**, `--tool copilot` supports GitHub Copilot, and `--tool all` installs shared Skills and separate rules for all three agents. Languages: `en`, `zh-CN`, `zh-TW`. To preview first, add `--check` to the installation command.
 
 Open or restart the project in your coding agent. Your installation now contains five Skills, editable settings under `.agent-workflow/`, and the relevant project rule. See the [step-by-step guide](docs/quickstart.md) if Skills do not appear.
 
@@ -91,7 +91,7 @@ Review **proposes** an edit to a Skill, a project rule, or `.agent-workflow/user
 
 ```text
 your-project/
-├── .cursor/skills/          # or .claude/skills/ (one copy for --tool both)
+├── .cursor/skills/          # or .claude/skills/ (--tool both/all), or .github/skills/ (copilot)
 │   ├── learn-requirement/
 │   ├── investigate/
 │   ├── make-plan/
@@ -99,6 +99,7 @@ your-project/
 │   └── review-skill/
 ├── .cursor/rules/agent-workflow.mdc  # Cursor, when selected
 │   # OR .claude/rules/agent-workflow.md for Claude Code
+│   # GitHub Copilot: .github/copilot-instructions.md
 └── .agent-workflow/
     ├── project-rules.md       # your project constraints and permissions
     ├── user-preferences.md    # editable starter response style
@@ -135,7 +136,7 @@ To add missing project rule files to an older installation, rerun `agent-workflo
 
 ## Documentation and community
 
-[Cursor guide](docs/cursor.md) · [Claude Code guide](docs/claude-code.md) · [Architecture](docs/architecture.md) · [Review design](docs/review-design.md) · [Roadmap](TODO.md) · [Changelog](CHANGELOG.md)
+[Cursor guide](docs/cursor.md) · [Claude Code guide](docs/claude-code.md) · [Copilot guide](docs/copilot.md) · [Architecture](docs/architecture.md) · [Review design](docs/review-design.md) · [Roadmap](TODO.md) · [Changelog](CHANGELOG.md)
 
 Feedback and reproducible bug reports are welcome via [GitHub Issues](https://github.com/kou-wang/self-improving-agent-workflow/issues). Include the CLI version, coding agent, command, expected behavior, and observed result—**without secrets or proprietary data**.
 

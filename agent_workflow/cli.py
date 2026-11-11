@@ -86,6 +86,10 @@ def _release_tree(tag: str, archive_url: str, root: Path) -> None:
     # an incomplete new release archive.
     if tag != "v0.1.0":
         needed.update(("templates/cursor-rule.mdc", "templates/claude-rule.md"))
+    # Copilot support was first added in v0.3.0. Preserve old release
+    # compatibility without accepting missing rules in new releases.
+    if _version_tuple(tag) >= (0, 3, 0):
+        needed.add("templates/copilot-instructions.md")
     found = {}
     total = 0
     with tarfile.open(fileobj=io.BytesIO(source), mode="r:gz") as archive:
@@ -131,7 +135,7 @@ def main(argv=None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     install = sub.add_parser("install", help="Install the latest stable workflow in a project")
-    install.add_argument("--tool", required=True, choices=("cursor", "claude", "both"))
+    install.add_argument("--tool", required=True, choices=("cursor", "claude", "both", "copilot", "all"))
     install.add_argument("--target", type=Path, default=Path.cwd())
     install.add_argument("--language", choices=install_engine.LANGUAGES, default="en")
     install.add_argument("--check", action="store_true", help="Dry run; default is to install")
@@ -157,6 +161,8 @@ def main(argv=None) -> int:
             root = Path(temp)
             _release_tree(tag, archive_url, root)
             if args.command == "install":
+                if args.tool in ("copilot", "all") and _version_tuple(tag) < (0, 3, 0):
+                    raise ValueError("GitHub Copilot requires official Release v0.3.0 or newer")
                 old = install_engine.ROOT
                 try:
                     install_engine.ROOT = root
