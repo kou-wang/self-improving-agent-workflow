@@ -18,7 +18,7 @@
 
 ## ✨ The idea
 
-**An agent can finish a task and still make you repeat yourself next time.** This project installs five reusable, independent coding-agent skills alongside editable project preferences. After a real interaction, `review-skill` can **propose** improvements to the instructions that shape future responses.
+**Less prompting. Better communication. More reusable skills.** Paste a bug screenshot, trace log, or a short request; then call the relevant Skill directly. Work through the task in normal conversation. Later, `review-skill` can **propose** saving preferences—like simpler explanations or preserving English technical terms—and improving existing Skills or creating project-local ones, so you do not have to repeat those corrections.
 
 > **Self-improving ≠ self-modifying.** Changes are evidence-based, proposed for human review, and applied only after separate authorization. No background training or automatic cross-project memory.
 
@@ -67,18 +67,17 @@ agent-workflow install --tool cursor --language en
 
 Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add `--check` to preview installation. The installer preserves existing files.
 
-## 🔁 Turn feedback into reusable improvements
+## 🔁 Turn one conversation into lasting improvements
 
-```text
-You:    /investigate — “Saved” appears, but changes disappear on refresh.
-Agent:  Explains observed behavior, evidence, and what remains unknown.
+**Paste context → call a Skill → talk naturally → review later.** You don't need to explain the task again each time you switch modes, or send a scripted prompt after every Skill.
 
-You:    /review-skill — I had to ask twice for the business impact.
-Agent:  Proposes an edit to user-preferences.md (or a relevant Skill).
+<div align="center">
 
-You:    Approve the proposed change and authorize applying it.
-Result: Your project instructions can guide future responses.
-```
+![Three-card conversation example: share a screenshot then investigate, request simpler explanations in English terminology, review preferences, and approve an update through execute](docs/assets/feedback-workflow.svg)
+
+</div>
+
+<p align="center"><sub>No scripted dialogue between Skills: share context and invoke only what you need. Review proposes improvements; after approval, apply with <code>/execute</code> (optionally <code>/make-plan</code> first).</sub></p>
 
 **Key features:** independent skills · editable response defaults · project-scoped instructions · safe non-overwriting installs · managed Skill updates · backups and guarded rollback.
 
