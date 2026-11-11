@@ -1,8 +1,8 @@
 # Quickstart: from zero to the first review
 
-**Preferred onboarding:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. Stable Release `v0.2.0` includes the independent Skills, RMA-derived starter preferences, and always-on project rules. The forthcoming `v0.2.1` is a documentation and licensing update. See the [CLI guide](cli.md). The source-checkout procedure below can be used for development.
+**Preferred onboarding:** install the CLI once using `pipx install git+https://github.com/kou-wang/self-improving-agent-workflow.git`, then from your project run `agent-workflow install --tool cursor --language zh-CN` and later `agent-workflow update`. Stable Release `v0.2.0` includes the independent Skills, RMA-derived starter preferences, and always-on project rules. GitHub Copilot installation is available in the v0.3.0 source branch and requires an official v0.3.0+ Release. See [Copilot setup](copilot.md). See the [CLI guide](cli.md). The source-checkout procedure below can be used for development.
 
-**Audience:** A new developer using Cursor, Claude Code, or both. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
+**Audience:** A new developer using Cursor, Claude Code, or GitHub Copilot. **Time requirement:** none; progress at your own pace. **Prerequisites:** Git, Python 3, one supported agent application, an existing project directory, and permission to add project files.
 
 This installs **five independent Skills and useful RMA-derived starter response preferences** (business-first, conclusion-first, concise and structured). They work immediately without a mandated Skill sequence. Review can propose edits to preferences, existing Skills, or new project-local Skills to reduce repeated developer input; it never silently changes files. See [Initialization defaults](initialization.md).
 
@@ -44,7 +44,7 @@ python3 scripts/install.py --tool both --target /absolute/path/to/your-project
 python3 scripts/install.py --tool both --target /absolute/path/to/your-project --apply
 ```
 
-For both, the installer uses `.claude/skills/` once because Cursor also discovers Skills there. No duplicated Skill definitions. The installer never overwrites an existing Skill or config. If anything is skipped, inspect and merge manually; it will not upgrade an existing install.
+From v0.3.0, use `agent-workflow install --tool copilot --language en` for GitHub Copilot or `--tool all` to install for all three agents in a new project. The combined installer uses `.claude/skills/` once because Cursor and Copilot also recognize Skills there. See [Copilot setup](copilot.md). For both, the installer uses `.claude/skills/` once because Cursor also discovers Skills there. No duplicated Skill definitions. The installer never overwrites an existing Skill or config. If anything is skipped, inspect and merge manually; it will not upgrade an existing install.
 
 Expected installed files:
 
