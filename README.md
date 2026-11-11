@@ -24,37 +24,13 @@
 
 ## 🧭 How it works
 
-```mermaid
-flowchart TB
-    Request["Your task or feedback"]
-    subgraph Skills["Five independent core skills"]
-        direction LR
-        Learn["01 · learn-requirement"]
-        Investigate["02 · investigate"]
-        Plan["03 · make-plan"]
-        Execute["04 · execute"]
-        Review["05 · review-skill"]
-    end
-    Request -. "invoke any skill directly" .-> Learn
-    Request -.-> Investigate
-    Request -.-> Plan
-    Request -.-> Execute
-    Request -.-> Review
-    Learn -. "optional handoff" .-> Plan
-    Investigate -. "optional handoff" .-> Plan
-    Plan -. "after approval" .-> Execute
-    Execute -. "feedback" .-> Review
-    Review --> Proposal{"Human approves?"}
-    Proposal -- "yes: separate authorized edit" --> Adapt["Preferences · Rules · Existing or new Skill"]
-    Proposal -- "no" --> Keep["Keep current behavior"]
-    Adapt -. "guide future work" .-> Request
-    classDef skill fill:#eaf3ff,stroke:#3478c0,color:#14365b
-    classDef decision fill:#fff4db,stroke:#b47b1a,color:#4f370e
-    class Learn,Investigate,Plan,Execute,Review skill
-    class Proposal decision
-```
+<div align="center">
 
-<p align="center"><sub>Optional paths, not a mandatory pipeline. A clear request can go straight to <code>make-plan</code> or <code>execute</code>.</sub></p>
+![Five independent core Skills and the human-approved improvement loop](docs/assets/workflow-overview.svg)
+
+</div>
+
+<p align="center"><sub>Each Skill is independent; improvements are proposals until you approve a separate change.</sub></p>
 
 ## 🧩 The five core skills
 
