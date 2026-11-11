@@ -97,7 +97,7 @@ def infer_tool(target: Path) -> str:
     claude = (target / ".claude/skills").exists()
     copilot = (target / ".github/skills").exists()
     if sum((cursor, claude, copilot)) > 1:
-        raise ValueError("Both Skill locations exist; installation history is missing. Resolve paths manually.")
+        raise ValueError("Multiple Skill locations exist; installation history is missing. Resolve paths manually.")
     if copilot:
         return "copilot"
     if cursor:
