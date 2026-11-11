@@ -69,16 +69,13 @@ Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add
 
 ## 🔁 Turn feedback into reusable improvements
 
-```text
-You:    /investigate — “Saved” appears, but changes disappear on refresh.
-Agent:  Explains observed behavior, evidence, and what remains unknown.
+<div align="center">
 
-You:    /review-skill — I had to ask twice for the business impact.
-Agent:  Proposes an edit to user-preferences.md (or a relevant Skill).
+![Three-step developer feedback story: investigate, review and approve a reusable improvement](docs/assets/feedback-workflow.svg)
 
-You:    Approve the proposed change and authorize applying it.
-Result: Your project instructions can guide future responses.
-```
+</div>
+
+<p align="center"><sub>Review suggests improvements; applying them always requires separate developer authorization.</sub></p>
 
 **Key features:** independent skills · editable response defaults · project-scoped instructions · safe non-overwriting installs · managed Skill updates · backups and guarded rollback.
 
