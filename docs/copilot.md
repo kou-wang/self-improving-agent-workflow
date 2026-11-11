@@ -44,7 +44,7 @@ The instructions file references your project-local preferences, project rules a
 
 For **a new project**, `agent-workflow install --tool all` installs the Skills once in `.claude/skills/`, which all three compatible agents can discover, and installs project instructions for Cursor, Claude Code, and Copilot.
 
-The existing `--tool both` continues to mean **Cursor + Claude Code** (it does not include Copilot). Independent installations in the same project may not share a managed update state: prefer choosing your target combination on a fresh project and do not assume `update` manages multiple separately installed copies.
+The existing `--tool both` continues to mean **Cursor + Claude Code** (it does not include Copilot). If an existing tracked installation uses a different Skills directory, the installer refuses to create a second unmanaged copy. Choose `--tool all` on a new project, or migrate the existing installation intentionally before changing tool modes. The installer also preserves any existing `.github/copilot-instructions.md`; merge preferences manually if you already use that file.
 
 ## Use the Skills
 
