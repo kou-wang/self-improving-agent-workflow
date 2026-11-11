@@ -4,6 +4,8 @@ This roadmap distinguishes shipped configuration/instructions from features that
 
 ## Near-term: onboarding and quality
 
+- [ ] Release and live-test GitHub Copilot integration (v0.3.0): VS Code agent mode, skill discovery, update, rollback
+
 - [x] Five canonical, human-in-the-loop Skills
 - [x] Review can **propose** editing an existing Skill or creating a new project-local Skill
 - [x] Three response language choices: `en` / `zh-CN` / `zh-TW`
