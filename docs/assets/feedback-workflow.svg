@@ -1,60 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
-<title id="title">From Feedback to a Better Workflow</title>
-<desc id="desc">Three optional steps: investigate a save issue, use review-skill to propose an improvement based on repeated feedback, and approve and separately authorize the change. Project instructions can then guide future interactions.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 790" role="img" aria-labelledby="title desc">
+<title id="title">Less Input, Better Agent Over Time</title>
+<desc id="desc">Share a bug screenshot, trace log, or a brief message, then call an appropriate independent Skill. Discuss the outcome naturally and ask for simpler explanations with English technical terms. Later, review-skill can propose storing communication preferences and improving or creating reusable Skills. After human approval, use execute, optionally preceded by make-plan, to apply the changes.</desc>
 <defs>
-<linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F8F7FF"/></linearGradient>
-<linearGradient id="outcome" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#EDEDFD"/><stop offset="1" stop-color="#F5EAFF"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F9F7FF"/></linearGradient>
+<linearGradient id="benefits" x1="0" y1="0" x2="1"><stop stop-color="#EAF0FF"/><stop offset="1" stop-color="#F5EAFF"/></linearGradient>
 </defs>
-<rect width="1600" height="800" rx="36" fill="url(#background)"/>
+<rect width="1600" height="790" rx="38" fill="url(#bg)"/>
 <g font-family="Arial,Helvetica,sans-serif">
-<text x="800" y="69" font-size="51" font-weight="800" text-anchor="middle" fill="#11182D">From Feedback to a Better Workflow</text>
-<text x="800" y="113" font-size="23" text-anchor="middle" fill="#60708F">A real example: investigate, review, and improve with your approval.</text>
+<text x="800" y="71" font-size="51" font-weight="800" text-anchor="middle" fill="#10192F">Less Input. A Better Agent.</text>
+<text x="800" y="114" font-size="22" text-anchor="middle" fill="#60718D">Share context, work naturally, then teach the agent what to remember.</text>
 <g>
-<rect x="34" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#B9DAFF" stroke-width="2"/>
-<path d="M64 164 H494 Q524 164 524 194 V286 H34 V194 Q34 164 64 164" fill="#EBF5FF"/>
-<circle cx="94" cy="220" r="30" fill="#3B82F6"/>
-<text x="94" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">1</text>
-<text x="146" y="226" font-size="35" font-weight="800" fill="#10172C">Investigate</text>
-<text x="66" y="268" font-size="20" fill="#43516C">Understand the issue with evidence</text>
-<text x="70" y="340" font-size="21" font-weight="700" fill="#3B82F6">YOU</text><rect x="70" y="355" width="418" height="109" rx="20" fill="#EBF5FF" stroke="#B9DAFF" stroke-width="1.2"/><text x="89" y="390" font-size="20" font-weight="700" fill="#192442">/investigate</text>
-<text x="89" y="416" font-size="19" font-weight="500" fill="#192442">“Saved” appears, but changes</text>
-<text x="89" y="442" font-size="19" font-weight="500" fill="#192442">disappear after refresh.</text>
-<text x="70" y="488" font-size="21" font-weight="700" fill="#4435A4">AGENT</text><rect x="70" y="503" width="418" height="109" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="89" y="538" font-size="19" font-weight="500" fill="#192442">Explains observed behavior,</text>
-<text x="89" y="564" font-size="19" font-weight="500" fill="#192442">evidence, and what remains</text>
-<text x="89" y="590" font-size="19" font-weight="500" fill="#192442">unknown.</text>
-</g>
-<g>
-<rect x="560" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#FFE1A0" stroke-width="2"/>
-<path d="M590 164 H1020 Q1050 164 1050 194 V286 H560 V194 Q560 164 590 164" fill="#FFF6DE"/>
-<circle cx="620" cy="220" r="30" fill="#E5A126"/>
-<text x="620" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">2</text>
-<text x="672" y="226" font-size="35" font-weight="800" fill="#10172C">Review</text>
-<text x="592" y="268" font-size="20" fill="#43516C">Turn feedback into a reusable fix</text>
-<text x="596" y="340" font-size="21" font-weight="700" fill="#E5A126">YOU</text><rect x="596" y="355" width="418" height="109" rx="20" fill="#FFF6DE" stroke="#FFE1A0" stroke-width="1.2"/><text x="615" y="390" font-size="20" font-weight="700" fill="#192442">/review-skill</text>
-<text x="615" y="416" font-size="19" font-weight="500" fill="#192442">I had to ask twice for the</text>
-<text x="615" y="442" font-size="19" font-weight="500" fill="#192442">business impact.</text>
-<text x="596" y="488" font-size="21" font-weight="700" fill="#4435A4">AGENT</text><rect x="596" y="503" width="418" height="109" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="615" y="538" font-size="19" font-weight="500" fill="#192442">Proposes a reusable update to</text>
-<text x="615" y="564" font-size="19" font-weight="500" fill="#192442">user-preferences.md or a</text>
-<text x="615" y="590" font-size="19" font-weight="500" fill="#192442">relevant Skill.</text>
+<rect x="30" y="155" width="490" height="451" rx="30" fill="#FFFFFF" stroke="#BBDDFB" stroke-width="2"/>
+<path d="M60 155 H490 Q520 155 520 185 V265 H30 V185 Q30 155 60 155" fill="#E9F4FF"/>
+<circle cx="87" cy="209" r="29" fill="#398BF4"/><text x="87" y="219" text-anchor="middle" font-size="30" font-weight="800" fill="#FFFFFF">1</text>
+<text x="132" y="215" font-size="32" font-weight="800" fill="#131B33">Share context</text>
+<text x="58" y="252" font-size="20" fill="#456078">Start with what you already have</text>
+<rect x="55" y="294" width="440" height="128" rx="23" fill="#F1F8FF"/>
+<text x="75" y="329" font-size="21" font-weight="750" fill="#2B70C8">YOU</text>
+<text x="75" y="359" font-size="20" fill="#17243D">Paste a bug screenshot, trace log,</text>
+<text x="75" y="387" font-size="20" fill="#17243D">or short request. No long prompt.</text>
+<rect x="55" y="446" width="440" height="117" rx="23" fill="#E7F3FF" stroke="#B8DCF9"/>
+<text x="75" y="481" font-size="21" font-weight="750" fill="#276DCA">THEN</text>
+<text x="75" y="515" font-size="23" font-weight="800" fill="#17243D">/investigate</text>
+<text x="75" y="543" font-size="19" fill="#4B5E7F">Call the Skill with existing context</text>
 </g>
 <g>
-<rect x="1086" y="164" width="490" height="496" rx="31" fill="#FFFFFF" stroke="#DBC3FF" stroke-width="2"/>
-<path d="M1116 164 H1546 Q1576 164 1576 194 V286 H1086 V194 Q1086 164 1116 164" fill="#F4EDFF"/>
-<circle cx="1146" cy="220" r="30" fill="#955BDF"/>
-<text x="1146" y="230" text-anchor="middle" font-weight="800" font-size="29" fill="#FFFFFF">3</text>
-<text x="1198" y="226" font-size="35" font-weight="800" fill="#10172C">Approve</text>
-<text x="1118" y="268" font-size="20" fill="#43516C">Decide what should change</text>
-<text x="1122" y="340" font-size="21" font-weight="700" fill="#955BDF">YOU</text><rect x="1122" y="355" width="418" height="83" rx="20" fill="#F4EDFF" stroke="#DBC3FF" stroke-width="1.2"/><text x="1141" y="390" font-size="19" font-weight="500" fill="#192442">Approve the proposal and</text>
-<text x="1141" y="416" font-size="19" font-weight="500" fill="#192442">separately authorize the edit.</text>
-<text x="1122" y="488" font-size="21" font-weight="700" fill="#4435A4">RESULT</text><rect x="1122" y="503" width="418" height="83" rx="20" fill="#F0EFFF" stroke="#DFDCFF" stroke-width="1.2"/><text x="1141" y="538" font-size="19" font-weight="500" fill="#192442">Approved project instructions</text>
-<text x="1141" y="564" font-size="19" font-weight="500" fill="#192442">can guide future responses.</text>
+<rect x="554" y="155" width="490" height="451" rx="30" fill="#FFFFFF" stroke="#F1D99A" stroke-width="2"/>
+<path d="M584 155 H1014 Q1044 155 1044 185 V265 H554 V185 Q554 155 584 155" fill="#FFF6DF"/>
+<circle cx="611" cy="209" r="29" fill="#E8AB38"/><text x="611" y="219" text-anchor="middle" font-size="30" font-weight="800" fill="#FFFFFF">2</text>
+<text x="654" y="215" font-size="31" font-weight="800" fill="#131B33">Work naturally</text>
+<text x="582" y="252" font-size="20" fill="#72613D">Talk until the task is understood</text>
+<rect x="579" y="294" width="440" height="128" rx="23" fill="#FFF8E9"/>
+<text x="599" y="329" font-size="21" font-weight="750" fill="#A77712">AGENT</text>
+<text x="599" y="359" font-size="20" fill="#17243D">Investigates, but explains too much</text>
+<text x="599" y="387" font-size="20" fill="#17243D">or uses confusing terminology.</text>
+<rect x="579" y="446" width="440" height="117" rx="23" fill="#FFF3D6" stroke="#F1DC9E"/>
+<text x="599" y="481" font-size="21" font-weight="750" fill="#A77712">YOU</text>
+<text x="599" y="513" font-size="21" font-weight="700" fill="#17243D">“Simplify it; keep English terms.”</text>
+<text x="599" y="544" font-size="19" fill="#715D38">Continue the conversation normally</text>
 </g>
-<path d="M525 417 h31 l-11 -12 m11 12 l-11 12" fill="none" stroke="#8D64D6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M1052 417 h30 l-11 -12 m11 12 l-11 12" fill="none" stroke="#8D64D6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="37" y="688" width="1526" height="82" rx="41" fill="url(#outcome)"/>
-<text x="93" y="740" font-weight="800" font-size="30" fill="#693CB5">◎</text>
-<text x="153" y="739" font-size="27" font-weight="800" fill="#1A2140">The outcome</text>
-<path d="M420 707 v44" stroke="#C4B6E8" stroke-width="2"/>
-<text x="459" y="739" font-size="25" font-weight="650" fill="#52329B">Fewer repeated corrections. Better project-specific guidance.</text>
+<g>
+<rect x="1078" y="155" width="490" height="451" rx="30" fill="#FFFFFF" stroke="#D7C3FF" stroke-width="2"/>
+<path d="M1108 155 H1538 Q1568 155 1568 185 V265 H1078 V185 Q1078 155 1108 155" fill="#F4ECFF"/>
+<circle cx="1135" cy="209" r="29" fill="#9262E4"/><text x="1135" y="219" text-anchor="middle" font-size="30" font-weight="800" fill="#FFFFFF">3</text>
+<text x="1176" y="215" font-size="31" font-weight="800" fill="#131B33">Review and improve</text>
+<text x="1106" y="252" font-size="20" fill="#655383">Make feedback reusable</text>
+<rect x="1103" y="294" width="440" height="128" rx="23" fill="#F4EEFF"/>
+<text x="1123" y="329" font-size="22" font-weight="800" fill="#6947C2">/review-skill</text>
+<text x="1123" y="360" font-size="19" fill="#17243D">Propose a saved response preference</text>
+<text x="1123" y="389" font-size="19" fill="#17243D">or update / create a reusable Skill</text>
+<rect x="1103" y="446" width="440" height="117" rx="23" fill="#EEE6FF" stroke="#D8C8FA"/>
+<text x="1123" y="481" font-size="21" font-weight="750" fill="#744CCB">AFTER YOUR APPROVAL</text>
+<text x="1123" y="513" font-size="21" font-weight="800" fill="#17243D">/execute</text>
+<text x="1123" y="543" font-size="18" fill="#67548C">Optional /make-plan before /execute</text>
 </g>
-</svg>
+<g fill="none" stroke="#9261D9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M523 382 H548 M537 370 l12 12 -12 12"/>
+<path d="M1047 382 H1072 M1061 370 l12 12 -12 12"/>
+</g>
+<path d="M1405 609 V641 Q1405 666 1377 666 H235 Q198 666 198 638 V608" fill="none" stroke="#9475E9" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M187 621 l11 -15 11 15" fill="none" stroke="#9475E9" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="527" y="638" width="545" height="53" rx="27" fill="#F2EEFF" stroke="#D4C3FF" stroke-width="1.5"/>
+<text x="800" y="672" font-size="23" font-weight="800" fill="#6545BB" text-anchor="middle">Future conversations need fewer corrections</text>
+<rect x="30" y="710" width="1538" height="62" rx="31" fill="url(#benefits)"/>
+<text x="167" y="751" font-size="23" font-weight="800" fill="#273357">Less user input</text>
+<text x="656" y="751" font-size="23" font-weight="800" fill="#273357">Adapted communication style</text>
+<text x="1249" y="751" font-size="23" font-weight="800" fill="#273357">Reusable Skills</text>
+</g></svg>
