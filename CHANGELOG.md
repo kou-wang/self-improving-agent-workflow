@@ -3,7 +3,13 @@
 All notable user-facing changes will be tracked here when publishing releases.
 Version tags follow SemVer (`vMAJOR.MINOR.PATCH`).
 
-## 0.2.1 — release preparation (not yet published)
+## 0.3.0 — in development (not yet published)
+
+- Add first-class GitHub Copilot installation (`--tool copilot`), Copilot project instructions, and a shared three-agent install mode (`--tool all`).
+- Extend versioned Skill update/rollback to Copilot and add release archive compatibility checks.
+- Document Copilot activation differences and test limitations; maintain existing Cursor/Claude behavior.
+
+## 0.2.1 — published 2026-11-10
 
 - Add MIT License and align package metadata for public reuse.
 - Update public onboarding and release documentation to match shipped v0.2.0 functionality.
