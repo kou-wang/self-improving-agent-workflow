@@ -69,15 +69,15 @@ Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add
 
 ## 🔁 Turn one conversation into lasting improvements
 
-**Paste context → call a Skill → talk naturally → review later.** You don't need to explain the task again each time you switch modes, or send a scripted prompt after every Skill.
+**Paste a screenshot → `/investigate` → `/make-plan` → refine the plan naturally → `/execute` → `/review-skill` → choose a suggestion → `/execute`.** The example shows a complete task, but each Skill remains independently callable.
 
 <div align="center">
 
-![Three-card conversation example: share a screenshot then investigate, request simpler explanations in English terminology, review preferences, and approve an update through execute](docs/assets/feedback-workflow.svg)
+![Complete developer-agent conversation: investigate the root cause, make and refine a plan, execute the fix, review two improvements, and apply only the selected suggestion](docs/assets/complete-conversation.svg)
 
 </div>
 
-<p align="center"><sub>No scripted dialogue between Skills: share context and invoke only what you need. Review proposes improvements; after approval, apply with <code>/execute</code> (optionally <code>/make-plan</code> first).</sub></p>
+<p align="center"><sub>Investigation establishes a supported root cause; planning addresses it. Review proposes changes without writing files, and Execute applies only the developer's selected suggestion.</sub></p>
 
 **Key features:** independent skills · editable response defaults · project-scoped instructions · safe non-overwriting installs · managed Skill updates · backups and guarded rollback.
 
