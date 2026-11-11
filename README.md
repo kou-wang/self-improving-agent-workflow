@@ -73,7 +73,7 @@ Languages: **English `en` · 简体中文 `zh-CN` · 繁體中文 `zh-TW`**. Add
 
 <div align="center">
 
-![Complete developer-agent conversation: investigate the root cause, make and refine a plan, execute the fix, review two improvements, and apply only the selected suggestion](docs/assets/complete-conversation.svg)
+![Complete developer-agent conversation: investigate the root cause, make and refine a plan, execute the fix, review two improvements, and apply only the selected suggestion](docs/assets/complete-conversation.png)
 
 </div>
 
